@@ -1,0 +1,16 @@
+.input {
+    
+    background-color: greenyellow;
+    
+}
+
+.a {
+    width: 200px;
+}
+
+
+.box{
+    display: flex;
+    flex-direction: row; 
+
+}
