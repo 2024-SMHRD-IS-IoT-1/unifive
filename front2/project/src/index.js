@@ -3,8 +3,9 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 // import App from './App';
 // import App from './components/Login'
-import App from './components/Main';
+//import App from './components/Main';
 import reportWebVitals from './reportWebVitals';
+import App from './components/Join'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
