@@ -1,0 +1,65 @@
+#login-box label {
+    display: block;
+    text-align: left;
+    margin-bottom: 0.5rem;   /* 라벨과 입력 필드 사이의 여백 */
+    font-size: 12px;         /* 라벨 텍스트 크기 */
+    margin-left: 10%;
+}
+
+#img{
+    padding-top: 10%;
+    width: 40%;
+    height: 15%;
+}
+
+#login{
+    display: flex;
+    align-items: center;    /* 수직 중앙 정렬 */
+    justify-content: center; /* 수평 중앙 정렬 */
+    height: 100vh;           /* 화면 전체 높이 */
+    background-color: #f6ffef; /* 배경색 설정 (필요에 따라 조정) */
+    /* padding: 10%;s */
+}
+
+
+#login-box{
+    /* background-color: rgb(226, 241, 226); */
+    padding: 1rem;           /* 폼 내부 여백 */
+    border-radius: 10px;     /* 모서리 둥글기 */
+    /* box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); 그림자 추가 */
+    text-align: center;      /* 텍스트 중앙 정렬 */
+    width: 100%;
+    max-width: 400px;        /* 폼 최대 너비 설정 */
+    height: 100%;
+    }
+
+    #idbox , #pwbox  {
+        width: 80%;
+        height: 30px;
+    }
+
+    #sub{
+        width: 80%;
+        height: 40px;
+        border: 1;
+        background-color: transparent;
+    }
+
+    #join,#find{
+        width: 40%;
+        height: 25px;
+        border: 0;
+        background-color: transparent;
+}
+
+@font-face {
+    font-family: 'GmarketSansMedium';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+  
+*{
+    font-family: 'S-CoreDream-3Light';
+}
