@@ -49,7 +49,7 @@ const Main = () => {
     const submitAlias = async (e) => {
         e.preventDefault();
         try{
-            await instance.post('/main')
+            await instance.post('/main/alias')
             setShowAliasInput(false);
             setInputAlias('');
         }catch(error){
