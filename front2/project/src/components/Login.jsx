@@ -1,11 +1,14 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import instance from '../axios' ;
 import '../style/login.css'
 
 
     const Login = () =>{
-        const [ inputId, setInputId ] = useState('')
-        const [ inputPw, setInputPw ] = useState('')
+
+        const { setInputId,setInputPw } = useContext(Data);
+
+        // const [ inputId, setInputId ] = useState('')
+        // const [ inputPw, setInputPw ] = useState('')
 
         useEffect(() => {
             console.log(inputId);
@@ -16,7 +19,7 @@ import '../style/login.css'
             
             try{
                 const response = await instance.post('/user/login', {inputId:inputId, inputPw:inputPw}) 
-                console.log(response,inputId);
+                // console.log(response,inputId);
             } catch(error){
                 console.error(error);
             }
