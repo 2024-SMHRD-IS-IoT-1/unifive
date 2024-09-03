@@ -1,13 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
+import { BrowserRouter } from 'react-router-dom';
 
 import App from './App';
 // import App from './components/Login';
 // import App from './components/Main';
 
 import reportWebVitals from './reportWebVitals';
-import App from './components/Join'
+// import App from './components/Join'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

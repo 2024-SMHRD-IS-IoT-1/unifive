@@ -32,11 +32,11 @@ const Join = () => {
                 inputEmail,
                 inputPw,
                 inputName,
-                inputPn
+                inputPhone:inputPn
             }
             
             // axios post 요청
-            const response = await axios.post('/user/join', userData)
+            const response = await axios.post('http://192.168.219.64:3001/user/join', userData)
 
             setMessage("회원가입이 성공했습니다.")
         } catch (error) {

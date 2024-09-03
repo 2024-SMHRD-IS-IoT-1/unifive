@@ -2,6 +2,11 @@ const express = require("express");
 const router = express.Router();
 const conn = require("../config/db");
 
+router.get("/", (req,res)=>{
+    console.log("user ROuter")
+    res.end()
+})
+
 // join 기능 라우터
 router.post("/join",(req,res)=>{
     let{inputId, inputPw, inputName, inputEmail, inputPhone} = req.body
@@ -24,11 +29,13 @@ router.post("/join",(req,res)=>{
 // 로그인 기능 라우터
 router.post("/login", (req, res) => {
     let { inputId, inputPw } = req.body;
-    let sql = "select id, nick from tbl_user where user_id=? and user_pw=SHA2(?, 224)";
+    console.log(req.body)
+    let sql = "select user_id, user_name from tbl_user where user_id=? and user_pw=SHA2(?, 224)";
     conn.query(sql, [inputId, inputPw], (err, rows) => {
+        console.log(rows)
         try {
             if (rows.length > 0) {
-                req.session.user_id=inputId;
+                // req.session.user_id=inputId;
                 res.json({ message: "success" });
             } else {
                 res.json({ message: "fail" });
