@@ -19,7 +19,7 @@ app.use(express.static(path.join(__dirname, '..', 'frontend', 'build')));
 
 
 // 포트 설정 2
-app.set('port', process.env.PORT || 8001);
+app.set('port', process.env.PORT || 3001);
 app.listen(app.get('port'), ()=>{
     console.log(`Server is running on ${app.get('port')}`);
 })
