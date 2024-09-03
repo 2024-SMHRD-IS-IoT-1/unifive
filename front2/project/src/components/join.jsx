@@ -15,6 +15,7 @@ const Join = () => {
     const [inputPw,setInputPw] = useState('')
     const [inputName,setInputName] = useState('')
     const [inputPn,setInputPn] = useState('')
+    const [message, setMessage] = useState('')
 
     const change = (e) => {
         if (e.target.value == '직접입력') selectref.current.disabled = false
