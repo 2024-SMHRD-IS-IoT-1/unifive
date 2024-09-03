@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const axios = require('axios');
+const data = require("./userRouter")
 
 router.post('/sendToArduino', (req, res) => {
     const { plantData } = req.body;
