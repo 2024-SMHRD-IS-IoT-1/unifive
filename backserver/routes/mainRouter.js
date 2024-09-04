@@ -17,7 +17,7 @@ router.post("/main/myplant",(req,res)=>{
                     return res.json({error: "DB query error"})
                 } 
                 console.log(2)
-                axios.post("http://192.168.219.62:3001/data", results)
+                axios.post("http://192.168.219.64:3001/data", results)
                 .then(response => res.json({message:autoMode}))
                 .catch(error => res.json({error:"autoMode error"}))
             });
