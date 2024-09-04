@@ -19,7 +19,7 @@ app.use("/main",mainRouter);
 
 // 리액트 프로젝트 경로 설정 4
 const path = require('path');
-app.use(express.static(path.join(__dirname, '..', 'frontend', 'build')));
+app.use(express.static(path.join(__dirname, '..', 'front2', 'project', 'build')));
 
 
 // 포트 설정 2

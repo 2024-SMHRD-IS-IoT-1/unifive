@@ -4,9 +4,9 @@ const conn = require("../config/db");
 const axios = require("axios");
 
 // 메인페이지 식물이름 받아와서 관련 데이터 전부 페이지에 보내는 기능 라우터
-router.post("/myplant",(req,res)=>{
+router.post("/main/myplant",(req,res)=>{
         // 수동 자동 제어 데이터 보내기
-        console.log(req.body)
+        console.log(req.re)
         let {auto, passivity, plant_idx} = req.body;
         console.log(1)
         if (auto){

@@ -1,8 +1,8 @@
 const express = require('express');
 const conn = require('../config/db'); // DB 연결 설정 파일
-const app = express();
+const router = express.Router();
 
-app.get('/data', (req, res) => {
+router.get('/data', (req, res) => {
     let sql = "SELECT * FROM tbl_your_table"; // DB에서 데이터 불러오기
     conn.query(sql, (err, results) => {
         if (err) {
@@ -12,6 +12,4 @@ app.get('/data', (req, res) => {
     });
 });
 
-app.listen(8001, () => {
-    console.log('Server running on port 8001');
-});
+module.exports = router;
