@@ -4,17 +4,20 @@ const conn = require("../config/db");
 const axios = require("axios");
 
 // 메인페이지 식물이름 받아와서 관련 데이터 전부 페이지에 보내는 기능 라우터
-router.post("/main",(req,res)=>{
+router.post("/myplant",(req,res)=>{
         // 수동 자동 제어 데이터 보내기
+        console.log(req.body)
         let {auto, passivity, plant_idx} = req.body;
-
+        console.log(1)
         if (auto){
             let sql = "select * from tbl_plant where plant_idx = ?"
             conn.query(sql, [plant_idx], (err, results)=>{
                 if(err){
+                    console.log(3)
                     return res.json({error: "DB query error"})
                 } 
-                axios.post("http://192.168.219.62:8001/data", results)
+                console.log(2)
+                axios.post("http://192.168.219.62:3001/data", results)
                 .then(response => res.json({message:autoMode}))
                 .catch(error => res.json({error:"autoMode error"}))
             });
@@ -25,9 +28,11 @@ router.post("/main",(req,res)=>{
         }
 });
 
-router.post("/main/alias",(req,res)=>{
+router.post("/alias",(req,res)=>{
         // 식물이름이 데이터에 있으면 식물별명 등록 후 gorwing_plant에 라우터
-        let {inputPlantName, inputId, inputAlias} =req.body
+        let data = req.body
+        console.log(data)
+        // let {inputPlantName, inputId, inputAlias} =
 
         let sql = "select * from tbl_plant where plant_name = ?"
         conn.query(sql, [inputPlantName], (err,results)=>{
