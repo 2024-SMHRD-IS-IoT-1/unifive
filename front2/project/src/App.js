@@ -8,7 +8,6 @@ import Alias from './components/Alias';
 import Community from './components/Community';
 import { Route, Routes } from 'react-router-dom';
 
-
 // import axios from 'axios';
 
 //
@@ -21,7 +20,7 @@ import { Route, Routes } from 'react-router-dom';
 function App() {
   return (
 
-    
+  
     <Routes>
       {/* {!inputId || !inputPw ?(
              <Route path='/' element={<Login />} />
@@ -39,7 +38,8 @@ function App() {
 
 
     </Routes>
-    
+  
+
   );
 }
 
