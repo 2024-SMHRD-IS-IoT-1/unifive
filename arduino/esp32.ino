@@ -1,58 +1,57 @@
 #include <WiFi.h>
 #include <HTTPClient.h>
+#include <ArduinoJson.h>
 
-const char* ssid = "SHRDI_501B"; // WIFI ID
-const char* password = "a123456789"; // WIFI PW
-bool sendData = false;
-// Server 요청 주소
-String address ="http://192.168.219.62:8001/data"; //post방식
-String result = ""; // 응답 결과 저장
-HTTPClient http; // 통신 객체
+const char* ssid = "SHRDI_501B";
+const char* password = "a123456789";
+String address = "http://localhost:3001/main/myplant"; // 서버 주소
+HTTPClient http;
 
 void setup() {
-  Serial.begin(115200); // Baud rate
-  pinMode(19, OUTPUT);
+  Serial.begin(115200);
   WiFi.begin(ssid, password);
   while (WiFi.status() != WL_CONNECTED) {
     delay(1000);
     Serial.println("Connecting to WiFi..");
   }
-
   Serial.println("Connected to the WiFi network");
 }
 
 void loop() {
-  
-  int sensor1 = 300;
-  int sensor2 = 500;
-  
-  if(btn == 0){
-    sendData = true;
-  }else{
-    sendData = false;
-  }
+  if (WiFi.status() == WL_CONNECTED) {
+    String plantName = "상추";  // 예시 식물 이름
+    String postdata = "inputPlantName=" + plantName;
 
-  if (sendData == true && (WiFi.status() == WL_CONNECTED)) { //Check the current connection status
-    
-    String postdata = "sensor1="+String(sensor1)+"&sensor2="+String(sensor2);
-    //String postdata = "btn="+String(btn);
     http.begin(address);
-    http.addHeader("Content-Type","application/x-www-form-urlencoded");
+    http.addHeader("Content-Type", "application/x-www-form-urlencoded");
 
-    int httpCode = http.POST(postdata); // 응답코드
+    int httpCode = http.POST(postdata);
     if (httpCode > 0) {
+      String payload = http.getString();
+      Serial.println(payload); // JSON 응답 출력
 
-      Serial.println(httpCode); // 응답코드 출력
-      result = http.getString(); // 응답 결과 저장
-      Serial.println(result); // 응답 결과 출력
+      // JSON 파싱
+      DynamicJsonDocument doc(1024);
+      deserializeJson(doc, payload);
 
+      // 데이터 추출
+      String plantName = doc[0]["plant_name"];
+      String plantHumidity = doc[0]["plant_humidity"];
+      String plantTempDay = doc[0]["plant_temp_day"];
+      String plantTempNight = doc[0]["plant_temp_night"];
+      String plantWater = doc[0]["plant_water"];
+
+      // 추출된 데이터 출력
+      Serial.println("Plant Name: " + plantName);
+      Serial.println("Humidity: " + plantHumidity);
+      Serial.println("Day Temperature: " + plantTempDay);
+      Serial.println("Night Temperature: " + plantTempNight);
+      Serial.println("Water Needs: " + plantWater);
+
+    } else {
+      Serial.println("Error on HTTP request");
     }
-
-
-    http.end(); //Free the resources
-    // sendData = false;
-  } else {
-    Serial.println("버튼 안눌림");
+    http.end();
   }
-  delay(500);
+  delay(10000);  // 10초마다 요청
 }
