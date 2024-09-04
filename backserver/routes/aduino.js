@@ -13,5 +13,5 @@ app.get('/data', (req, res) => {
 });
 
 app.listen(8001, () => {
-    console.log('Server running on port 8001');
+    console.log('Server running on port 3001');
 });
