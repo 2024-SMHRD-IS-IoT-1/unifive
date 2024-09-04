@@ -22,10 +22,11 @@ const Alias = () => {
         e.preventDefault();
 
         try {
-            const response = await axios.post('http://192.168.219.64:3001/main/main', { inputPlantName });
-
+            const response = await axios.post('http://192.168.219.64:3001/main/myplant', { inputPlantName });
+            console.log(response)
             if (response.data.message === 'success') {
                 setResponseMessage(response.data);
+                
             } else {
                 alert('Plant not found or error')
                 setResponseMessage(null);
@@ -35,14 +36,15 @@ const Alias = () => {
             alert('Error fetching plant data');
         }
     };
-
+     
+    console.log(inputPlantName)
     const submitAlias = async (e) => {
         e.preventDefault();
         if (responseMessage) {
             try {
                 await axios.post('http://192.168.219.64:3001/main/alias', 
                     {
-                    user_id: 'user_id', 
+                    user_id: responseMessage.user_id, 
                     plant_idx: responseMessage.plant_idx,
                     inputAlias
                 });
