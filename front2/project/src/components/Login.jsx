@@ -3,6 +3,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import axios from 'axios';
 import '../style/login.css'
 import { useNavigate } from 'react-router-dom';
+import Cookies from "js-cookie" // 쿠키
 
 
 
@@ -23,8 +24,17 @@ import { useNavigate } from 'react-router-dom';
             e.preventDefault()
             
             try{
-                const response = await axios.post('http://192.168.219.64:3001/user/login', {inputId:inputId, inputPw:inputPw}) 
+                const response = await axios.post('http://192.168.219.56:3001/user/login', {inputId:inputId, inputPw:inputPw}) 
                 console.log(response,inputId);
+                const token = response.data.token; // 백에서 넘어온 토큰
+                console.log("토큰",response.data.token)
+
+                // jwt 토큰을 쿠키에 저장
+                Cookies.set('token', token, {expires : 1}) // 1일 후 만료
+
+                // 쿠키에 jwt 확인하기
+                console.log('쿠키',token)
+
                 if (response.data.message ==='success') {
                     navigate('/main')
                 }    
@@ -34,10 +44,28 @@ import { useNavigate } from 'react-router-dom';
                 
             }
         }
+
         
         const handleJoin = () => {
             navigate('/join')
         }
+        
+        // 로그인 상태 확인(쿠키)
+        //import Cookies from "js-cookie"
+        //import { useNavigate } from 'react-router-dom'
+        //import React, {useEffect} from 'react'
+        const StayLogin = () => {
+            const navigate = useNavigate()
+           
+            useEffect(()=>{
+                const userToken = Cookies.get('userToken')
+
+                if(!userToken) {
+                    navigate('/login');
+                }
+            }, [navigate])
+        }
+
 
         return(
             <div id='login'>
