@@ -1,6 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const conn = require("../config/db");
+const jwt = require('jsonwebtoken')
+
 
 router.get("/", (req,res)=>{
     console.log("user ROuter")
@@ -36,7 +38,18 @@ router.post("/login", (req, res) => {
         try {
             if (rows.length > 0) {
                 // req.session.user_id=inputId;
-                res.json({ message: "success" });
+                const token = jwt.sign(
+                    {
+                        id : inputId
+                    },
+                    "secretkey",
+                    {
+                        expiresIn : '24h'
+                    }
+                )
+                console.log(token)
+                res.json({ message: "success" , token : token});
+                
             } else {
                 res.json({ message: "fail" });
             }
@@ -44,7 +57,11 @@ router.post("/login", (req, res) => {
             console.log(err);
         }
     });
+
+
 });
+
+
 
 //정보수정 기능 라우터
 router.post("/user/update", (req,res)=>{
