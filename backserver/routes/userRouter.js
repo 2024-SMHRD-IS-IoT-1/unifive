@@ -10,7 +10,7 @@ router.get("/", (req,res)=>{
 // join 기능 라우터
 router.post("/join",(req,res)=>{
     let{inputId, inputPw, inputName, inputEmail, inputPhone} = req.body
-
+    console.log('d')
     let sql = "insert into tbl_user(user_id, user_pw, user_name, user_email, user_phone) values (?,SHA2(?, 224),?,?,?)"
     conn.query(sql,[inputId, inputPw, inputName, inputEmail, inputPhone], (err, rows)=>{
         try{
