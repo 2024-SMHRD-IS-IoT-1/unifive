@@ -9,7 +9,7 @@ const Main = () => {
     return (
         <div>
             <h1>Main Page</h1>
-            <Link to='/alias'>
+            <Link to='/main/alias'>
                 <button>+ Add Plant</button>
             </Link>
         </div>

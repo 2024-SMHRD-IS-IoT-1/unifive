@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
     const Login = () =>{
         const [ inputId, setInputId ] = useState('')
         const [ inputPw, setInputPw ] = useState('')
-       
+        // const [ responseMessage, setResponseMessage ] = useState('')
         const navigate = useNavigate();
 
         useEffect(() => {
@@ -21,8 +21,9 @@ import { useNavigate } from 'react-router-dom';
             try{
                 const response = await axios.post('http://192.168.219.64:3001/user/login', {inputId:inputId, inputPw:inputPw}) 
                 console.log(response,inputId);
-                
-                navigate('/main')
+                if (response.data.message ==='success') {
+                    navigate('/main')
+                }    
                 
             } catch(error){
                 console.error('Error Data',error);
