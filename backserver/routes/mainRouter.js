@@ -32,7 +32,7 @@ router.post("/main/alias",(req,res)=>{
             let growingIdx = idxResults[0].next_idx;
 
 
-        let sql = "insert into tbl_glowing_plant(growing_idx, user_id, plant_idx, growing_st_dt, plant_alias) values (?,?,?,CURRENT_TIMESTAMP,?)"
+        let sql = "insert into tbl_growing_plant(growing_idx, user_id, plant_idx, growing_st_dt, plant_alias) values (?,?,?,CURRENT_TIMESTAMP,?)"
         conn.query(sql, [growingIdx, user_id ,plant_idx, inputAlias], (err,plantAlias)=>{
             if(err){
                 return res.json("plantAlias error");
