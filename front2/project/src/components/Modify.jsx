@@ -6,8 +6,15 @@ const Modify = () => {
 
 
   return (
-    <div>
-        
+    <div id='modify'>
+        <h1>회원정보 수정</h1>
+        <form onSubmit={sendInput} id='modify-box'>
+            <h2>아이디</h2>
+            <input type="text" />
+            <h2>이름</h2>
+            <input type="text" />
+            
+        </form>
     </div>
   )
 }

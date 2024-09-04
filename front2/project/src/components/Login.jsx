@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from 'react'
-import instance from '../axios' ;
+// import instance from '../axios' ;
+import axios from 'axios';
 import '../style/login.css'
+import { useNavigate } from 'react-router-dom';
 
 
     const Login = () =>{
         const [ inputId, setInputId ] = useState('')
         const [ inputPw, setInputPw ] = useState('')
+       
+        const navigate = useNavigate();
 
         useEffect(() => {
             console.log(inputId);
@@ -15,11 +19,19 @@ import '../style/login.css'
             e.preventDefault()
             
             try{
-                const response = await instance.post('/user/login', {inputId:inputId, inputPw:inputPw}) 
+                const response = await axios.post('http://192.168.219.64:3001/user/login', {inputId:inputId, inputPw:inputPw}) 
                 console.log(response,inputId);
+                
+                navigate('/main')
+                
             } catch(error){
-                console.error(error);
+                console.error('Error Data',error);
+                
             }
+        }
+        
+        const handleJoin = () => {
+            navigate('/join')
         }
 
         return(
@@ -41,7 +53,7 @@ import '../style/login.css'
                     <br />
                     <br />
                     <br />
-                    <button id='join'>회원가입</button>
+                    <button id='join' onClick={handleJoin}>회원가입</button>
                     <button id='find'>비밀번호 찾기</button>
                 </form>
             </div>
