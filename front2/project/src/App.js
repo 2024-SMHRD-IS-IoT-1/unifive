@@ -6,13 +6,15 @@ import Main from './components/Main';
 import Join from './components/Join';
 import Alias from './components/Alias';
 import Community from './components/Community';
+import Post from './components/Post';
 import { Route, Routes } from 'react-router-dom';
+
 // import axios from 'axios';
+
 
 
 function App () {
 return (
-
       
          <Routes>
            
@@ -22,13 +24,14 @@ return (
            <Route path='/main/myplant' element={<Alias />}></Route>
            <Route path='/main/alias' element={<Alias />} />
            <Route path='/community' element={<Community />}></Route>
+           <Route path='/post' element={<Post />}></Route>
 
 
-         </Routes>
+          </Routes>
+  
+  );
+}
 
-
-   );
- }
 
 
 export default App;

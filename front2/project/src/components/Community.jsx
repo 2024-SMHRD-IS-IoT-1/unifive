@@ -2,8 +2,10 @@ import React from 'react'
 import { useEffect, useState } from 'react'
 // import { Tab } from '@headlessui/react';
 // import { User, Calendar, MessageSquare, Heart } from 'lucide-react';
-// import axios from 'axios';
+import axios from 'axios';
 // import { response } from 'express';
+
+
 
 
 
@@ -16,12 +18,11 @@ const initialPosts = [
     { id: 6, title: "쉬운 파스타 레시피", content: "누구나 할 수 있는 파스타 요리", category: "레시피공유" },
   ]
 
-
 const Community = () => {
 
     const [posts,setPosts] = useState(initialPosts);
     const [selectedCategory, setSelectedCategory] = useState('전체')
-    const [newPost,setNewPost] = useState({ title: '', content: '', category: '자유게시글' });
+    const [newPost,setNewPost] = useState({ title: '', content: '', category: '자유게시글'  });
     const [showForm, setShowForm] = useState(false);
 
     const categories = ['전체', '자유게시글', '직접키운식물자랑', '레시피공유']
@@ -35,10 +36,18 @@ const Community = () => {
         setNewPost({...newPost, [name]:value });
     };
 
-    const handleleFormSubmit = (e) => {
+    const handleleFormSubmit = async (e) => {
         e.preventDefault();
-        setPosts([...posts,{...newPost, id: posts.length + 1}]);
-        setNewPost({title:'' , content:'', category:'자유게시글'});
+
+        try{
+            const response = await axios.get('https://192.168.219.64:3001/community', newPost)
+
+            setPosts([...posts,{...newPost, id: posts.length + 1}]);
+            setNewPost({title:'' , content:'', category:'자유게시글'});
+        } catch (error) {
+            console.error('게시글 추가 실패:', error);
+        }
+       
     };
    
     const handleButtonClick = () => {
@@ -65,39 +74,8 @@ const Community = () => {
                 {showForm ? '취소' : '게시글 작성'}
             </button>
 
-            {showForm && (
-                <div>
-                    <h2>게시글 작성</h2>
-                    <form onSubmit={handleleFormSubmit}>
-                        <input 
-                            type='text'
-                            name='title'
-                            value={newPost.title}
-                            onChange={handleInputChange}
-                            placeholder='제목을 입력하세요'
-                            required
-                        />
-                        <textarea 
-                            name='content'
-                            value={newPost.content}
-                            onChange={handleInputChange}
-                            placeholder='내용을 입력하세요'
-                            required
-                        />
-                        <select
-                            name='category'
-                            value={newPost.category}
-                            onChange={handleInputChange}
-                        >
-                            {categories.filter(cat => cat !=='전체').map(category=>(
-                                <option key={category} value={category}>{category}</option>
-                            ))}
-                        </select>
-                        <button type="submit">게시글 추가</button>
-                    </form>
-                </div>
-            )}
             {!showForm && (
+
             <ul>
                 {filteredPosts.map((post) => (
                     <li key={post.id} className=''>
@@ -114,24 +92,13 @@ const Community = () => {
                     </li>
                 ))}
             </ul>
+
+
             )}
     </div>   
   )
 }
 
 
-
-
 export default Community
 
-
-
-       
-  
-      
-
-
-
-
-
- 

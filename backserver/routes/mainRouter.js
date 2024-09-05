@@ -14,7 +14,7 @@ router.post("/",(req,res)=>{
                 if(err){
                     return res.json({error: "DB query error"})
                 } 
-                axios.post("http://localhost:3001/data", results)
+                axios.post("http://192.168.219.64:3001/data", results)
                 .then(response => res.json({message:autoMode}))
                 .catch(error => res.json({error:"autoMode error"}))
             });
@@ -30,26 +30,28 @@ router.post("/myplant",(req,res)=>{
     console.log(1)
     let sql = "select * from tbl_plant where plant_name = ?"
     conn.query(sql, [inputPlantName], (err,results)=>{
+        console.log(2)
         if(err){
-            return res.json("error")
+            return res.status(500).json({ message: "Database error", error: err.message });
+            console.log(3)
         }
         //res.json(results); // db에 있는 이름과 일치하는 식물데이터 정보
-        // res.json({message:"success"},results);
-        else if(results.length > 0) {
-            res.json({message: "success" , results});
+        if (results.length > 0) {
+            res.status(200).json({ message: "success", data: results });
         } else {
-            res.json({message:"not found"})
+            res.json({ message: "plant not found" });
         }
-});
-})
+        console.log(4) 
+        });
+    });
 
 router.post("/alias",(req,res)=>{
         // 식물이름이 데이터에 있으면 식물별명 등록 후 gorwing_plant에 라우터
         // const data = req.body
         // console.log(data)
         // const inputPlantName = data.inputPlantName
-        let {plant_idx, user_id, inputAlias} =req.body
-        console.log(5)
+        let {plant_idx, inputId, inputAlias} =req.body
+        console.log(1)
         // 다음 growing_idx 값 가져오기
         let getNextIdxSql = "SELECT IFNULL(MAX(growing_idx), 0) + 1 AS next_idx FROM tbl_growing_plant";
         conn.query(getNextIdxSql, (err, idxResults) => {
@@ -58,18 +60,17 @@ router.post("/alias",(req,res)=>{
             }
 
             let growingIdx = idxResults[0].next_idx;
-            console.log(6)    
+            console.log(1)    
 
         let sql = "insert into tbl_growing_plant(growing_idx, user_id, plant_idx, growing_st_dt, plant_alias) values (?,?,?,CURRENT_TIMESTAMP,?)"
-        conn.query(sql, [growingIdx, user_id, plant_idx,  inputAlias], (err,plantAlias)=>{
+        conn.query(sql, [growingIdx, inputId ,plant_idx, inputAlias], (err,plantAlias)=>{
             if(err){
                 return res.json("plantAlias error");
             }
-            res.json({message:"success",plantAlias});
-            console.log(3)
+            res.json({message:"success"});
             });
         });
-    });
+})
 
 
 module.exports = router;

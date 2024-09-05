@@ -2,37 +2,21 @@ import axios from 'axios'
 import React, { useState,useEffect } from 'react'
 import { useNavigate,useLocation } from 'react-router-dom'
 import Cookies from "js-cookie"
-
+import '../style/alias.css'
+import { Button } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css'; 
 
 
 const Alias = () => {
-
-        //     // 로그인 상태 확인(쿠키)
-        // //import Cookies from "js-cookie"
-        // //import { useNavigate } from 'react-router-dom'
-        // //import React, {useEffect} from 'react'
-        // const StayLogin = () => {
-        //     const navigate = useNavigate()
-           
-        //     useEffect(()=>{
-        //         const userToken = Cookies.get('userToken')
-
-        //         if(!userToken) {
-        //             navigate('/login');
-        //         }
-        //     }, [navigate])
-        // }
-
 
     const [inputPlantName, setInputPlantName] = useState('');
     const [inputAlias, setInputAlias] = useState('');
     const [responseMessage, setResponseMessage] = useState(null);
     const navigate = useNavigate();
     const location = useLocation(); 
-    console.log('Current path:', location.pathname);
+    // console.log('Current path:', location.pathname);
  
     useEffect(() => {
-        // Ensure the pathname is valid
         if (location.pathname === '/main/alias' && !responseMessage) {
             navigate('/main/myplant');
         }
@@ -40,7 +24,7 @@ const Alias = () => {
 
     const handleInputChange = (e) => {
         setInputPlantName(e.target.value);
-        // console.log(e.target.value);
+        console.log(e.target.value);
     };
 
     const handleAliasChange = (e) => {
@@ -49,13 +33,15 @@ const Alias = () => {
 
     const sendPlant = async (e) => {
         e.preventDefault();
+        
 
         try {
-            const response = await axios.post('http://localhost:3001/main/myplant', { inputPlantName });
-            console.log(response.data);
-
-            if (response.data.message === 'success') {
-                console.log(response.data.message);
+            
+            const response = await axios.post('http://192.168.219.64:3001/main/myplant', { inputPlantName });
+            console.log('Response Data:',response.data); 
+            
+            if (response.data.message === "success") {
+                console.log('Success Message:', response.data.message);
                 setResponseMessage(response.data);
                 navigate('/main/alias');
             } else {
@@ -80,12 +66,12 @@ const Alias = () => {
                 const plant_name = result.plant_name;
                 console.log(result);
                 if (plant_idx !== undefined && plant_name !== undefined){
-                    await axios.post('http://localhost:3001/main/alias',
+                    await axios.post('http://192.168.219.64:3001/main/alias',
                         {
+                            // input_id
+                            // : input_id,
                             plant_idx
                             : plant_idx,
-                            plant_name
-                            : plant_name,
                             inputAlias
                             : inputAlias
                         });
@@ -102,20 +88,23 @@ const Alias = () => {
     }
 
     return (
-        <div>
-            <h1>식물 검색</h1>
-            {location.pathname === '/main/myplant' && (
-                <form onSubmit={sendPlant}>
-                    <input
-                        type='text'
-                        value={inputPlantName}
-                        onChange={handleInputChange}
-                        placeholder='Enter plant name'
-                        required
-                    />
-                    <button type='submit'>Search Plant</button>
-                </form>
-            )}
+        <div className='alias-container'>
+            <div className="input-wrapper">
+                <h4>식물이름을 입력하세요.</h4>
+                {location.pathname === '/main/myplant' && (
+                    <form onSubmit={sendPlant}>
+                        <input
+                            type='text'
+                            value={inputPlantName}
+                            onChange={handleInputChange}
+                            placeholder='Enter plant name'
+                            required
+                        />
+                        <Button type='submit' variant="outline-success">Search Plant</Button>
+                    </form>
+                )}
+            </div>    
+             <div className="input-wrapper">
              {location.pathname === '/main/alias' && responseMessage && (
                 <form onSubmit={submitAlias}>
                     <h2>별칭 입력</h2>
@@ -126,9 +115,10 @@ const Alias = () => {
                         placeholder='Enter alias'
                         required
                     />
-                    <button type='submit'>Add Alias</button>
+                    <Button type='submit' variant="outline-success">Add Alias</Button>
                 </form>
             )}
+            </div>   
         </div>
     )
 }

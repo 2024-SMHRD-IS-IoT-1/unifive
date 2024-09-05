@@ -2,9 +2,14 @@
 const express = require('express');
 const app = express();
 const bp = require("body-parser");
+
+
+
 // routes 경로에 있는 파일 호출
 const userRouter = require("./routes/userRouter");
 const mainRouter = require("./routes/mainRouter");
+
+
 // cors 설정 ( 도메인 주소가 달라도 일치 시킬 수 있음)
 const cors = require('cors')
 app.use(cors());
