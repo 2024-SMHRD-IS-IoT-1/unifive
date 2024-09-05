@@ -7,6 +7,7 @@ import Cookies from "js-cookie"
 
 const Alias = () => {
 
+
             // 로그인 상태 확인(쿠키)
         //import Cookies from "js-cookie"
         //import { useNavigate } from 'react-router-dom'
@@ -22,6 +23,7 @@ const Alias = () => {
                 }
             }, [navigate])
         }
+
 
 
     const [inputPlantName, setInputPlantName] = useState('');
@@ -51,6 +53,7 @@ const Alias = () => {
         e.preventDefault();
 
         try {
+
             const response = await axios.post('http://localhost:3001/main/myplant', { inputPlantName });
             console.log(response.data);
 
@@ -58,6 +61,7 @@ const Alias = () => {
                 console.log(response.data.message);
                 setResponseMessage(response.data);
                 navigate('/main/alias');
+
             } else {
                 alert('Plant not found or error')
                 setResponseMessage(null);
@@ -74,6 +78,7 @@ const Alias = () => {
 
         if (responseMessage) {
             try {
+
                 console.log('Response Message:',responseMessage);
                 const result = responseMessage.results[0] || {};
                 const plant_idx = result.plant_idx;
@@ -94,6 +99,7 @@ const Alias = () => {
                 }else {
                     throw new Error('Invalid response data');
                 }
+
             } catch (error) {
                 console.error('Error adding alias', error);
                 alert('Error adding alias');
@@ -104,6 +110,7 @@ const Alias = () => {
     return (
         <div>
             <h1>식물 검색</h1>
+
             {location.pathname === '/main/myplant' && (
                 <form onSubmit={sendPlant}>
                     <input
@@ -119,6 +126,7 @@ const Alias = () => {
              {location.pathname === '/main/alias' && responseMessage && (
                 <form onSubmit={submitAlias}>
                     <h2>별칭 입력</h2>
+
                     <input
                         type='text'
                         value={inputAlias}
