@@ -8,6 +8,7 @@ router.post("/",(req,res)=>{
         // 수동 자동 제어 데이터 보내기
         let {auto, passivity, plant_idx} = req.body;
 
+
         if (auto){
             let sql = "select * from tbl_plant where plant_idx = ?"
             conn.query(sql, [plant_idx], (err, results)=>{
@@ -55,7 +56,13 @@ router.post("/alias",(req,res)=>{
         //     if (err) {
         //         return res.json("error getting next growing_idx");
         //     }
+        // let getNextIdxSql = "SELECT IFNULL(MAX(growing_idx), 0) + 1 AS next_idx FROM tbl_growing_plant";
+        // conn.query(getNextIdxSql, (err, idxResults) => {
+        //     if (err) {
+        //         return res.json("error getting next growing_idx");
+        //     }
 
+        //     let growingIdx = idxResults[0].next_idx;   
         //     let growingIdx = idxResults[0].next_idx;   
 
         let sql = "insert into tbl_growing_plant(user_id, plant_idx, growing_st_dt, plant_alias) values (?,?,CURRENT_TIMESTAMP,?)"
