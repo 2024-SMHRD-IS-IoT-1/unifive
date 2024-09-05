@@ -8,21 +8,14 @@ router.post("/",(req,res)=>{
         // 수동 자동 제어 데이터 보내기
         let {auto, passivity, plant_idx} = req.body;
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 31ae1609374d58438f6c7d96fa797b503873c90f
         if (auto){
             let sql = "select * from tbl_plant where plant_idx = ?"
             conn.query(sql, [plant_idx], (err, results)=>{
                 if(err){
                     return res.json({error: "DB query error"})
                 } 
-<<<<<<< HEAD
-                axios.post("http://192.168.219.64:3001/data", results)
-=======
                 axios.post("http://192.168.219.56:3001/data", results)
->>>>>>> 31ae1609374d58438f6c7d96fa797b503873c90f
+
                 .then(response => res.json({message:autoMode}))
                 .catch(error => res.json({error:"autoMode error"}))
             });
@@ -35,7 +28,7 @@ router.post("/",(req,res)=>{
 
 router.post("/myplant",(req,res)=>{
     let {inputPlantName} =req.body
-<<<<<<< HEAD
+
     console.log(1)
     let sql = "select * from tbl_plant where plant_name = ?"
     conn.query(sql, [inputPlantName], (err,results)=>{
@@ -81,22 +74,6 @@ router.post("/alias",(req,res)=>{
         });
 })
 
-=======
-
-    let sql = "select * from tbl_plant where plant_name = ?"
-    conn.query(sql, [inputPlantName], (err,results)=>{
-        if(err){
-            return res.json("error")
-        }
-        //res.json(results); // db에 있는 이름과 일치하는 식물데이터 정보
-        if (results.length > 0) {
-            res.json({ message: "success", data: results });
-        } else {
-            res.json({ message: "plant not found" });
-        }
-        });
-});
->>>>>>> 31ae1609374d58438f6c7d96fa797b503873c90f
 
 router.post("/alias",(req,res)=>{
         // 식물이름이 데이터에 있으면 식물별명 등록 후 gorwing_plant에 라우터

@@ -2,10 +2,7 @@ import React from 'react'
 import { useEffect, useState } from 'react'
 import axios from 'axios';
 
-<<<<<<< HEAD
 
-=======
->>>>>>> 31ae1609374d58438f6c7d96fa797b503873c90f
 const Post = () => {
 
     const [ posts,setPosts ] = useState([]);
@@ -18,7 +15,7 @@ const Post = () => {
     useEffect(() => {
         const fetchPosts = async () => {
             try {
-                const response = await axios.get('http://192.168.219.56:3001/community/post');
+                const response = await axios.get('http://192.168.219.64:3001/community/post');
                 setPosts(response.data);
             } catch (error) {
                 console.error('게시글 가져오기 실패:' , error);

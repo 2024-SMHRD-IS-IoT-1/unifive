@@ -123,11 +123,8 @@ const Alias = () => {
     return (
         <div className='alias-container'>
             <div className="input-wrapper">
-<<<<<<< HEAD
                 <h4>식물이름을 입력하세요.</h4>
-=======
                 <h1>식물 검색</h1>
->>>>>>> 31ae1609374d58438f6c7d96fa797b503873c90f
                 {location.pathname === '/main/myplant' && (
                     <form onSubmit={sendPlant}>
                         <input

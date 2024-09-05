@@ -6,9 +6,6 @@ import axios from 'axios';
 // import { response } from 'express';
 
 
-
-
-
 const initialPosts = [
     { id: 1, title: "오늘 날씨가 좋네요", content: "날씨가 정말 좋아요!", category: "자유게시글" },
     { id: 2, title: "제 토마토 좀 보세요", content: "토마토가 잘 자랐어요.", category: "직접키운식물자랑" },
@@ -40,7 +37,7 @@ const Community = () => {
         e.preventDefault();
 
         try{
-            const response = await axios.get('https://192.168.219.56:3001/community', newPost)
+            const response = await axios.get('https://192.168.219.64:3001/community', newPost)
 
             setPosts([...posts,{...newPost, id: posts.length + 1}]);
             setNewPost({title:'' , content:'', category:'자유게시글'});
@@ -101,3 +98,4 @@ const Community = () => {
 
 
 export default Community
+
