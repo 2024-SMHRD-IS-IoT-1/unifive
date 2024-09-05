@@ -15,7 +15,7 @@ router.post("/",(req,res)=>{
                 if(err){
                     return res.json({error: "DB query error"})
                 } 
-                axios.post("http://192.168.219.62:3001/data", results)
+                axios.post("http://192.168.219.56:3001/data", results)
                 .then(response => res.json({message:autoMode}))
                 .catch(error => res.json({error:"autoMode error"}))
             });
@@ -48,7 +48,7 @@ router.post("/alias",(req,res)=>{
         // const data = req.body
         // console.log(data)
         // const inputPlantName = data.inputPlantName
-        let {plant_idx, inputId, inputAlias} =req.body
+        let {plant_idx, user_id, inputAlias} =req.body
         console.log(1)
         // 다음 growing_idx 값 가져오기
         // let getNextIdxSql = "SELECT IFNULL(MAX(growing_idx), 0) + 1 AS next_idx FROM tbl_growing_plant";
@@ -56,21 +56,15 @@ router.post("/alias",(req,res)=>{
         //     if (err) {
         //         return res.json("error getting next growing_idx");
         //     }
-        // let getNextIdxSql = "SELECT IFNULL(MAX(growing_idx), 0) + 1 AS next_idx FROM tbl_growing_plant";
-        // conn.query(getNextIdxSql, (err, idxResults) => {
-        //     if (err) {
-        //         return res.json("error getting next growing_idx");
-        //     }
-
-        //     let growingIdx = idxResults[0].next_idx;   
         //     let growingIdx = idxResults[0].next_idx;   
 
         let sql = "insert into tbl_growing_plant(user_id, plant_idx, growing_st_dt, plant_alias) values (?,?,CURRENT_TIMESTAMP,?)"
-        conn.query(sql, [inputId ,plant_idx, inputAlias], (err,plantAlias)=>{
+        conn.query(sql, [user_id ,plant_idx, inputAlias], (err,res)=>{
             if(err){
+                console.log(err)
                 return res.json("plantAlias error");
             }
-            console.log(2)
+            console.log(res)
             res.json({message:"success"});
             });
     });
