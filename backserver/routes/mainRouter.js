@@ -4,20 +4,17 @@ const conn = require("../config/db");
 const axios = require("axios");
 
 // 메인페이지 식물이름 받아와서 관련 데이터 전부 페이지에 보내는 기능 라우터
-router.post("/main/myplant",(req,res)=>{
+router.post("/",(req,res)=>{
         // 수동 자동 제어 데이터 보내기
-        console.log(req.re)
         let {auto, passivity, plant_idx} = req.body;
-        console.log(1)
+
         if (auto){
             let sql = "select * from tbl_plant where plant_idx = ?"
             conn.query(sql, [plant_idx], (err, results)=>{
                 if(err){
-                    console.log(3)
                     return res.json({error: "DB query error"})
                 } 
-                console.log(2)
-                axios.post("http://192.168.219.64:3001/data", results)
+                axios.post("http://localhost:3001/data", results)
                 .then(response => res.json({message:autoMode}))
                 .catch(error => res.json({error:"autoMode error"}))
             });
@@ -28,22 +25,31 @@ router.post("/main/myplant",(req,res)=>{
         }
 });
 
+router.post("/myplant",(req,res)=>{
+    let {inputPlantName} =req.body
+    console.log(1)
+    let sql = "select * from tbl_plant where plant_name = ?"
+    conn.query(sql, [inputPlantName], (err,results)=>{
+        if(err){
+            return res.json("error")
+        }
+        //res.json(results); // db에 있는 이름과 일치하는 식물데이터 정보
+        // res.json({message:"success"},results);
+        else if(results.length > 0) {
+            res.json({message: "success" , results});
+        } else {
+            res.json({message:"not found"})
+        }
+});
+})
+
 router.post("/alias",(req,res)=>{
         // 식물이름이 데이터에 있으면 식물별명 등록 후 gorwing_plant에 라우터
-        let data = req.body
-        console.log(data)
-        // let {inputPlantName, inputId, inputAlias} =
-
-        let sql = "select * from tbl_plant where plant_name = ?"
-        conn.query(sql, [inputPlantName], (err,results)=>{
-            if(err){
-                return res.json("error")
-            }
-            //res.json(results); // db에 있는 이름과 일치하는 식물데이터 정보
-            res.json({message:"success"});
-            let plant_idx = results.plant_idx
-        
-
+        // const data = req.body
+        // console.log(data)
+        // const inputPlantName = data.inputPlantName
+        let {plant_idx, user_id, inputAlias} =req.body
+        console.log(5)
         // 다음 growing_idx 값 가져오기
         let getNextIdxSql = "SELECT IFNULL(MAX(growing_idx), 0) + 1 AS next_idx FROM tbl_growing_plant";
         conn.query(getNextIdxSql, (err, idxResults) => {
@@ -52,17 +58,18 @@ router.post("/alias",(req,res)=>{
             }
 
             let growingIdx = idxResults[0].next_idx;
-
+            console.log(6)    
 
         let sql = "insert into tbl_growing_plant(growing_idx, user_id, plant_idx, growing_st_dt, plant_alias) values (?,?,?,CURRENT_TIMESTAMP,?)"
-        conn.query(sql, [growingIdx, inputId ,plant_idx, inputAlias], (err,plantAlias)=>{
+        conn.query(sql, [growingIdx, user_id, plant_idx,  inputAlias], (err,plantAlias)=>{
             if(err){
                 return res.json("plantAlias error");
             }
-            res.json({message:"success"});
+            res.json({message:"success",plantAlias});
+            console.log(3)
             });
         });
     });
-});
+
 
 module.exports = router;
