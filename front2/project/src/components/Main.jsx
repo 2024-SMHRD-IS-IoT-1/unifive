@@ -1,18 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import axios from 'axios' ;
 import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom';
-
+import {Data} from '../App' 
 
 
 const Main = () => {
-
+    const {userId} = useContext(Data);
         const [ plantList,setPlantList ] = useState([]);
-
+        console.log(userId);
         useEffect(()=>{
             const fetchPlants = async () => {
                 try {
-                    const response = await axios.get('경로설정')
+                    const response = await axios.get('http://192.168.219.56:3001/main')
                     setPlantList(response.data.plants);
                 } catch (error) {
                     console.error('Error fetching plant data' , error);
