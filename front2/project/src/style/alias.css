@@ -7,14 +7,6 @@
     background-color: #f7f9fc; /* 배경 색상 */
 }
 
-
-h4 {
-    /* text-align: center; */
-    margin-top: 10px;
-    margin-bottom: 20px;
-    color: #333;
-}
-
 .input-wrapper {
     margin: 10px 0;
     width: 80%;
@@ -26,37 +18,12 @@ h4 {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-input[type="text"] {
+input {
     width: 100%;
     padding: 10px;
-    margin-bottom: 20px;
-    border: 2px solid #ddd;
-    border-radius: 8px;
-    font-size: 16px;
-    box-sizing: border-box;
-    transition: border-color 0.3s ease;
-}
-
-input[type="text"]:focus {
-    border-color: #b0d1ad;
-    outline: none;
-}
-
-/* button {
-    width: 100%;
-    padding: 12px;
-    border-radius: 8px;
-    background-color: #c9ffd6;
-    color: white;
-    font-size: 16px;
-    cursor: pointer;
     border: none;
-    transition: background-color 0.3s ease;
-} */
-
-button:hover {
-    background-color: #218838;
-
+    outline: none;
+    font-size: 16px;
 }
 
 @font-face {
