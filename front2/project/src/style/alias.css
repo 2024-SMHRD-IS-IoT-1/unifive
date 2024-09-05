@@ -7,7 +7,7 @@
     background-color: #f7f9fc; /* 배경 색상 */
 }
 
-<<<<<<< HEAD
+
 h4 {
     /* text-align: center; */
     margin-top: 10px;
@@ -15,8 +15,6 @@ h4 {
     color: #333;
 }
 
-=======
->>>>>>> 31ae1609374d58438f6c7d96fa797b503873c90f
 .input-wrapper {
     margin: 10px 0;
     width: 80%;
@@ -28,7 +26,6 @@ h4 {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-<<<<<<< HEAD
 input[type="text"] {
     width: 100%;
     padding: 10px;
@@ -59,14 +56,7 @@ input[type="text"]:focus {
 
 button:hover {
     background-color: #218838;
-=======
-input {
-    width: 100%;
-    padding: 10px;
-    border: none;
-    outline: none;
-    font-size: 16px;
->>>>>>> 31ae1609374d58438f6c7d96fa797b503873c90f
+
 }
 
 @font-face {

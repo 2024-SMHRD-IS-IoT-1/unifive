@@ -40,7 +40,7 @@ const Community = () => {
         e.preventDefault();
 
         try{
-            const response = await axios.get('https://192.168.219.64:3001/community', newPost)
+            const response = await axios.get('https://192.168.219.56:3001/community', newPost)
 
             setPosts([...posts,{...newPost, id: posts.length + 1}]);
             setNewPost({title:'' , content:'', category:'자유게시글'});
