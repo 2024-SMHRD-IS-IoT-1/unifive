@@ -2,7 +2,10 @@ import React from 'react'
 import { useEffect, useState } from 'react'
 import axios from 'axios';
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 31ae1609374d58438f6c7d96fa797b503873c90f
 const Post = () => {
 
     const [ posts,setPosts ] = useState([]);

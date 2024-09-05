@@ -1,28 +1,37 @@
 import React, { useContext, useEffect, useState } from 'react'
-// import instance from '../axios' ;
 import axios from 'axios';
 import '../style/login.css'
 import { useNavigate } from 'react-router-dom';
 import Cookies from "js-cookie" // 쿠키
+<<<<<<< HEAD
 import { Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css'; 
 
+=======
+import { jwtDecode } from 'jwt-decode'
+import { Data } from '../App';
+import { Button } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css'; 
+>>>>>>> 31ae1609374d58438f6c7d96fa797b503873c90f
 
 
 
 
 
 const Login = () => {
+    const {setUserId} = useContext(Data);
     const [inputId, setInputId] = useState('')
     const [inputPw, setInputPw] = useState('')
+    // const [userId, setuserId] = useState('')
     // const [ responseMessage, setResponseMessage ] = useState('')
     const navigate = useNavigate();
 
     useEffect(() => {
         console.log(inputId);
-    });
+    }, [inputId]);
 
 
+<<<<<<< HEAD
         const sendInput = async (e) => {
             e.preventDefault()
             
@@ -31,23 +40,30 @@ const Login = () => {
                 console.log(response,inputId);
                 const token = response.data.token; // 백에서 넘어온 토큰
                 console.log("토큰",response.data.token)
+=======
+    const sendInput = async (e) => {
+        e.preventDefault()
+>>>>>>> 31ae1609374d58438f6c7d96fa797b503873c90f
 
-                // jwt 토큰을 쿠키에 저장
-                Cookies.set('token', token, {expires : 1}) // 1일 후 만료
+        try {
+            const response = await axios.post('http://192.168.219.56:3001/user/login', { inputId: inputId, inputPw: inputPw })
+            console.log(response, inputId);
 
-                // 쿠키에 jwt 확인하기
-                console.log('쿠키',token)
+            // 서버에서 받은 JWT
+            const token = response.data.token; 
+            console.log("토큰", token)
 
-                if (response.data.message ==='success') {
-                    navigate('/main')
-                }    
-                
-            } catch(error){
-                console.error('Error Data',error);
-                
+            // JWT 토큰을 쿠키에 저장
+            Cookies.set('token', token, { expires: 1 }) // 1일 후 만료
+
+            // 쿠키에 jwt 확인하기
+            console.log('쿠키에 저장된 토큰', Cookies.get('token'))
+
+            if (response.data.message === 'success') {
+                navigate('/')
             }
-        }
 
+<<<<<<< HEAD
         
         const handleJoin = () => {
             navigate('/join')
@@ -66,10 +82,57 @@ const Login = () => {
 
                 if(!userToken) {
                     navigate('/login');
+=======
+            // JWT 토큰 디코딩 -> 사용자 id 추출
+            if (token) {
+                try{
+                    const decoded = jwtDecode(token)
+                    setUserId(decoded.id) //디코딩된 Id를 유저 아이디에 저장
+                    console.log('디코딩 성공?', decoded.id)
+                } catch (error) {
+                    console.log('디코딩 실패',error)
+>>>>>>> 31ae1609374d58438f6c7d96fa797b503873c90f
                 }
-            }, [navigate])
-        }
+            }
 
+        } catch (error) {
+            console.error('Error Data', error);
+
+        }
+    }
+
+<<<<<<< HEAD
+=======
+
+
+
+    const handleJoin = () => {
+        navigate('/join')
+    }
+
+    // 로그인 상태 확인(쿠키)
+    //import Cookies from "js-cookie"
+    //import { useNavigate } from 'react-router-dom'
+    //import React, {useEffect} from 'react'
+    const StayLogin = () => {
+        const navigate = useNavigate()
+
+        useEffect(() => {
+            const userToken = Cookies.get('userToken')
+
+            if (!userToken) {
+                navigate('/login');
+            }
+        }, [navigate])
+    }
+
+
+
+
+
+
+
+>>>>>>> 31ae1609374d58438f6c7d96fa797b503873c90f
     return (
         <div id='login'>
                 

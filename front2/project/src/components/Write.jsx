@@ -3,7 +3,11 @@ import React from 'react'
 const Write = () => {
   return (
     <div>
+<<<<<<< HEAD
         <h2>게시글 작성</h2>
+=======
+        {/*<h2>게시글 작성</h2>
+>>>>>>> 31ae1609374d58438f6c7d96fa797b503873c90f
             <form onSubmit={handleleFormSubmit}>
                 <input 
                     type='text'
@@ -30,7 +34,11 @@ const Write = () => {
                     ))}
                 </select>
                 <button type="submit">게시글 추가</button>
+<<<<<<< HEAD
             </form>
+=======
+            </form> */}
+>>>>>>> 31ae1609374d58438f6c7d96fa797b503873c90f
     </div>
   )
 }

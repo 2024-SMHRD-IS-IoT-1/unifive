@@ -7,10 +7,16 @@ import { useNavigate } from 'react-router-dom';
 
 const Main = () => {
 
+<<<<<<< HEAD
         const [ plantList,setPlantList ] = useState([]); // 식물 데이터를 저장할 상태
 
         useEffect(()=>{
             // 컴포넌트가 마운트될 때 서버에서 식물 정보를 받아옴
+=======
+        const [ plantList,setPlantList ] = useState([]);
+
+        useEffect(()=>{
+>>>>>>> 31ae1609374d58438f6c7d96fa797b503873c90f
             const fetchPlants = async () => {
                 try {
                     const response = await axios.get('경로설정')
