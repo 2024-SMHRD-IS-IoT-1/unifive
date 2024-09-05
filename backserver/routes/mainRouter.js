@@ -34,7 +34,12 @@ router.post("/myplant",(req,res)=>{
             return res.json("error")
         }
         //res.json(results); // db에 있는 이름과 일치하는 식물데이터 정보
-        res.json({message:"success"},results);
+        if (results.length > 0) {
+            res.json({ message: "success", data: results });
+        } else {
+            res.json({ message: "plant not found" });
+        }
+        });
 });
 
 router.post("/alias",(req,res)=>{
@@ -53,14 +58,14 @@ router.post("/alias",(req,res)=>{
 
         //     let growingIdx = idxResults[0].next_idx;   
 
-        let sql = "insert into tbl_growing_plant(growing_idx, user_id, plant_idx, growing_st_dt, plant_alias) values (?,?,?,CURRENT_TIMESTAMP,?)"
-        conn.query(sql, [growingIdx, inputId ,plant_idx, inputAlias], (err,plantAlias)=>{
+        let sql = "insert into tbl_growing_plant(user_id, plant_idx, growing_st_dt, plant_alias) values (?,?,CURRENT_TIMESTAMP,?)"
+        conn.query(sql, [inputId ,plant_idx, inputAlias], (err,plantAlias)=>{
             if(err){
                 return res.json("plantAlias error");
             }
+            console.log(2)
             res.json({message:"success"});
             });
     });
-});
 
 module.exports = router;

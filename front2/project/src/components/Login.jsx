@@ -21,59 +21,50 @@ const Login = () => {
     });
 
 
-        const sendInput = async (e) => {
-            e.preventDefault()
-            
-            try{
-                const response = await axios.post('http://192.168.219.56:3001/user/login', {inputId:inputId, inputPw:inputPw}) 
-                console.log(response,inputId);
-                const token = response.data.token; // 백에서 넘어온 토큰
-                console.log("토큰",response.data.token)
+    const sendInput = async (e) => {
+        e.preventDefault()
 
-                // jwt 토큰을 쿠키에 저장
-                Cookies.set('token', token, {expires : 1}) // 1일 후 만료
+        try {
+            const response = await axios.post("http://192.168.219.62:3001/data/user/login", { inputId: inputId, inputPw: inputPw })
+            console.log(response, inputId);
+            const token = response.data.token; // 백에서 넘어온 토큰
+            console.log("토큰", response.data.token)
 
-                // 쿠키에 jwt 확인하기
-                console.log('쿠키',token)
+            // jwt 토큰을 쿠키에 저장
+            Cookies.set('token', token, { expires: 1 }) // 1일 후 만료
 
-                if (response.data.message ==='success') {
-                    navigate('/main')
-                }    
-                
-            } catch(error){
-                console.error('Error Data',error);
-                
+            // 쿠키에 jwt 확인하기
+            console.log('쿠키', token)
+
+            if (response.data.message === 'success') {
+                navigate('/main')
             }
+
+        } catch (error) {
+            console.error('Error Data', error);
+
         }
+    }
 
-        
-        const handleJoin = () => {
-            navigate('/join')
-        }
-        
-        // 로그인 상태 확인(쿠키)
-        //import Cookies from "js-cookie"
-        //import { useNavigate } from 'react-router-dom'
-        //import React, {useEffect} from 'react'
-        const StayLogin = () => {
-            const navigate = useNavigate()
-           
-            useEffect(()=>{
-                const userToken = Cookies.get('userToken')
-
-                if(!userToken) {
-                    navigate('/login');
-                }
-            }, [navigate])
-        }
-
-
-
-        
-    
 
     const handleJoin = () => {
         navigate('/join')
+    }
+
+    // 로그인 상태 확인(쿠키)
+    //import Cookies from "js-cookie"
+    //import { useNavigate } from 'react-router-dom'
+    //import React, {useEffect} from 'react'
+    const StayLogin = () => {
+        const navigate = useNavigate()
+
+        useEffect(() => {
+            const userToken = Cookies.get('userToken')
+
+            if (!userToken) {
+                navigate('/login');
+            }
+        }, [navigate])
     }
 
     return (
