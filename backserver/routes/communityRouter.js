@@ -27,3 +27,5 @@ router.get("/write",(req,res)=>{
         res.json({message:"등록완료",data:post});
     });
 })
+
+module.exports=router;
