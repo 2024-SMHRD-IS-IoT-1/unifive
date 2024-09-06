@@ -18,7 +18,7 @@ app.use(bp.urlencoded({extended : true})); // post 방식 변경
 app.use(express.json());
 app.use("/user",userRouter);
 app.use("/main",mainRouter);
-app.use("/communitiy",communityRouter);
+app.use("/community",communityRouter);
 
 // 메인페이지 경로 설정 3
 // const joinRouter = require('./routes/userRouter')

@@ -36,7 +36,7 @@ const Join = () => {
             }
 
             // axios post 요청
-            const response = await axios.post('http://192.168.219.62:3001/user/join', userData)
+            const response = await axios.post('http://192.168.219.56:3001/user/join', userData)
 
             setMessage("회원가입이 성공했습니다.")
         } catch (error) {

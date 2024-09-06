@@ -26,6 +26,7 @@ router.get("/write",(req,res)=>{
         console.log(1)
         res.json({message:"등록완료",data:post});
     });
+<<<<<<< HEAD
 })
 
 
@@ -76,3 +77,6 @@ router.post("/comment",(req,res)=>{
 
 
 module.exports = router;
+=======
+})
+>>>>>>> 8051a8df7b29ab5440f432e652ae9a1dab71aaf0
