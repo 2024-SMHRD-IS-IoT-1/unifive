@@ -5,29 +5,33 @@ const axios = require("axios");
 
 // 메인페이지 식물이름 받아와서 관련 데이터 전부 페이지에 보내는 기능 라우터
 router.post("/",(req,res)=>{
-        // 수동 자동 제어 데이터 보내기
-        let {auto, passivity, plant_idx} = req.body;
+        let {userId} = req.body
+        let sql = "SELECT * FROM tbl_growing_plant a JOIN tbl_user b ON a.user_id = b.user_id = ? JOIN tbl_plant c ON a.plant_idx = c.plant_idx"
+        conn.query(sql, [userId], (err,result)=>{
+            if(err){
+                return res.status(500).json("error");
+            }else{
+                res.json({message:"seccess",data :result });
+            }
+        })
 
 
-        if (auto){
-            let sql = "select * from tbl_plant where plant_idx = ?"
-            conn.query(sql, [plant_idx], (err, results)=>{
-                if(err){
-                    return res.status(500).json({error: "DB query error"})
-                } 
-<<<<<<< HEAD
-                axios.post("http://192.168.219.64:3001/data", results)
-=======
-                axios.post("http://192.168.219.62:3001/data", results)
->>>>>>> 026a67ab24a8b4f3b8209417d4274aac22dbe07f
-                .then(response => res.json({message:autoMode}))
-                .catch(error => res.json({error:"autoMode error"}))
-            });
-        }else if(passivity){
-            
-        }else{
-            res.json({error:"/main error"})
-        }
+
+        // // 수동 자동 제어 데이터 보내기
+        // let {user_id} = req.body;
+        // console.log(req.body.auto)
+
+        // if (!auto){
+        //     let sql = "select * from tbl_plant where plant_idx = ?"
+        //     conn.query(sql, [plant_idx], (err, results)=>{
+        //         if(err){
+        //             return res.status(500).json({error: "DB query error"})
+        //         } 
+        //         res.json({data:results});
+        //     });
+        // }else{
+        //     res.json({error:"/main error"})
+        // }
 });
 
 router.post("/myplant",(req,res)=>{

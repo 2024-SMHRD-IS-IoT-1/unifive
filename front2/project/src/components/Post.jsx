@@ -4,13 +4,13 @@ import { useParams } from 'react-router-dom';
 import { Data } from '../App'
 
 const Post = () => {
-  const [ post, setPost ] = useState(null);
-  const [ newComment, setNewComment ] = useState('');
-  const [ comments, setComments ] = useState([]);
-  const [ image, setImage ] = useState(null);
-  const [ loading, setLoading ] = useState(false);
+  const [post, setPost] = useState(null);
+  const [newComment, setNewComment] = useState('');
+  const [comments, setComments] = useState([]);
+  const [image, setImage] = useState(null);
+  const [loading, setLoading] = useState(false);
   const { postIdx } = useParams(); // URL 파라미터에서 post_idx 가져오기
-  const { userId,setUserId } = useContext(Data);
+  const { userId, setUserId } = useContext(Data);
 
   useEffect(() => {
     const fetchPostData = async () => {
@@ -20,17 +20,17 @@ const Post = () => {
         return;
       }
       try {
-        const response = await axios.get(`http://192.168.219.64:3001/community/post/${postIdx}`);
+        const response = await axios.get(`http://192.168.219.62:3001/community/post/${postIdx}`);
         console.log('Server response:', response.data); // 서버 응답 로그 확인
 
-        const { post,comments } = response.data;
+        const { post, comments } = response.data;
         setPost(post);
         setComments(comments);
       } catch (error) {
         console.error('게시글 데이터를 가져오는 중 오류 발생 :', error);
       }
     };
-    
+
     fetchPostData();
   }, [postIdx]);
 
@@ -39,7 +39,7 @@ const Post = () => {
     if (newComment.trim() === '') return;
     console.log(userId)
     try {
-      const commentData = { post_idx: postIdx, content: newComment ,user_id: userId};
+      const commentData = { post_idx: postIdx, content: newComment, user_id: userId };
       console.log('댓글 데이터:', commentData);
       const response = await axios.post('http://192.168.219.64:3001/community/comment', commentData);
       console.log('댓글 전송 응답:', response.data);
@@ -86,7 +86,7 @@ const Post = () => {
           <p className="post-body">{post.post_content}</p>
           <div className="post-actions">
             <button className="action-button">
-               좋아요
+              좋아요
             </button>
             <button className="action-button">
               댓글
