@@ -6,7 +6,7 @@ const axios = require("axios");
 // 메인페이지 식물이름 받아와서 관련 데이터 전부 페이지에 보내는 기능 라우터
 router.post("/",(req,res)=>{
         let {userId} = req.body
-        let sql = "SELECT * FROM tbl_growing_plant a JOIN tbl_user b ON a.user_id = b.user_id = ? JOIN tbl_plant c ON a.plant_idx = c.plant_idx"
+        let sql = "SELECT * FROM tbl_growing_plant a JOIN tbl_user b ON a.user_id = b.user_id JOIN tbl_plant c ON a.plant_idx = c.plant_idx WHERE b.user_id = ?"
         conn.query(sql, [userId], (err,result)=>{
             if(err){
                 return res.status(500).json("error");
