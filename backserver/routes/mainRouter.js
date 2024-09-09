@@ -15,7 +15,7 @@ router.post("/",(req,res)=>{
                 if(err){
                     return res.json({error: "DB query error"})
                 } 
-                axios.post("http://192.168.219.56:3001/data", results)
+                axios.post("http://192.168.219.64:3001/data", results)
                 .then(response => res.json({message:autoMode}))
                 .catch(error => res.json({error:"autoMode error"}))
             });

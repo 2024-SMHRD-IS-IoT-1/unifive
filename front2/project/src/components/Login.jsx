@@ -29,7 +29,7 @@ const Login = () => {
         e.preventDefault()
 
         try {
-            const response = await axios.post('http://192.168.219.56:3001/user/login', { inputId: inputId, inputPw: inputPw })
+            const response = await axios.post('http://192.168.219.64:3001/user/login', { inputId: inputId, inputPw: inputPw })
             console.log(response, inputId);
 
             // 서버에서 받은 JWT

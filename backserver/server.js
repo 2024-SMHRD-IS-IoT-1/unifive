@@ -14,7 +14,7 @@ const communityRouter = require("./routes/communityRouter")
 // cors 설정 ( 도메인 주소가 달라도 일치 시킬 수 있음)
 const cors = require('cors')
 app.use(cors());
-app.use(bp.urlencoded({extended : true})); // post 방식 변경
+app.use(express.urlencoded({ extended: true })); // post 방식 변경
 app.use(express.json());
 app.use("/user",userRouter);
 app.use("/main",mainRouter);

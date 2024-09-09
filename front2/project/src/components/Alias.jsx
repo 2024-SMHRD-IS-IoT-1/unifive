@@ -19,11 +19,10 @@ const Alias = () => {
     const location = useLocation();
     // console.log('Current path:', location.pathname);
     console.log(userId)
+
     useEffect(() => {
         if (location.pathname === '/main/alias' && !responseMessage) {
             navigate('/main/myplant');
-
-
         }
         console.log(responseMessage)
     }, [location.pathname, responseMessage, navigate]);
@@ -70,7 +69,7 @@ const Alias = () => {
             const plant_name = responseMessage.plant_name;
             console.log(plant_idx, plant_name)
             if (plant_idx !== undefined && plant_name !== undefined) {
-                await axios.post('http://192.168.219.56:3001/main/alias',
+                await axios.post('http://192.168.219.64:3001/main/alias',
                     {
                         // input_id
                         // : input_id,

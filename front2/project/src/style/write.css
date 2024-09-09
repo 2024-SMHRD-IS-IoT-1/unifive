@@ -1,0 +1,109 @@
+/* 전체 페이지 컨테이너 */
+.community-page {
+    background-color: #f4f4f9;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    width: 100%;
+}
+
+.page-title {
+    text-align: center;
+    font-size: 2rem;
+    color: #34495e;
+    margin-bottom: 30px;
+    font-weight: 600;
+}
+
+/* 폼 인풋 필드 스타일 */
+.post-header, .post-content, .category-buttons {
+    margin-bottom: 20px;
+}
+
+.post-header label, .post-content label, .category-buttons label {
+    display: block;
+    font-size: 1.1rem;
+    color: #2c3e50;
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+
+input[type='text'],
+textarea,
+select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    color: #2c3e50;
+    transition: border-color 0.3s ease;
+}
+
+input[type='text']:focus,
+textarea:focus,
+select:focus {
+    border-color: #3498db;
+    outline: none;
+}
+
+/* 텍스트 영역 스타일 */
+textarea {
+    resize: vertical;
+    min-height: 150px;
+}
+
+/* 카테고리 선택 스타일 */
+select {
+    background-color: #fff;
+    cursor: pointer;
+}
+
+/* 버튼 스타일 */
+.write-post-button {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 12px;
+    font-size: 1.1rem;
+    width: 100%;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+}
+
+.write-post-button:hover {
+    background-color: #2980b9;
+}
+
+/* 미디어 쿼리: 작은 화면에 맞춤 조정 */
+@media screen and (max-width: 768px) {
+    .container {
+        padding: 20px;
+    }
+
+    .page-title {
+        font-size: 1.5rem;
+    }
+
+    input[type='text'],
+    textarea,
+    select {
+        font-size: 0.9rem;
+    }
+
+    .write-post-button {
+        font-size: 1rem;
+    }
+}
