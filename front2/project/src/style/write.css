@@ -1,20 +1,21 @@
 /* 전체 페이지 컨테이너 */
 .community-page {
-    background-color: #f4f4f9;
-    padding: 20px;
+    /* background-color: #2f2fda; */
+    padding: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
+    
 }
 
 .container {
     background-color: #fff;
-    padding: 40px;
+    padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    max-width: 600px;
-    width: 100%;
+    max-width: 1000px;
+    width: 350px;
 }
 
 .page-title {
@@ -53,7 +54,7 @@ select {
 input[type='text']:focus,
 textarea:focus,
 select:focus {
-    border-color: #3498db;
+    border-color: #96dbb3;
     outline: none;
 }
 
@@ -71,7 +72,7 @@ select {
 
 /* 버튼 스타일 */
 .write-post-button {
-    background-color: #3498db;
+    background-color: #325e34;
     color: white;
     border: none;
     border-radius: 5px;
@@ -84,11 +85,11 @@ select {
 }
 
 .write-post-button:hover {
-    background-color: #2980b9;
+    background-color: #456650;
 }
 
 /* 미디어 쿼리: 작은 화면에 맞춤 조정 */
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 800px) {
     .container {
         padding: 20px;
     }

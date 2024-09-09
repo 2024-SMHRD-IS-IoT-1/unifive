@@ -1,8 +1,9 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
-import axios from 'axios';
+import axios, { formToJSON } from 'axios';
 import '../style/community.css';
 import { useNavigate } from 'react-router-dom';
+
 
 const Community = () => {
     const [activeCategory, setActiveCategory] = useState('전체');

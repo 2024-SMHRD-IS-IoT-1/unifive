@@ -1,6 +1,6 @@
-body {
+body { 
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
-    background-color: #f7fafc; /* 배경 색상 추가 */
+    background-color: #f7fafc;
     margin: 0;
     padding: 0;
   } 
@@ -8,7 +8,7 @@ body {
   
   .main-container {
     min-height: 100vh;
-    background: linear-gradient(to bottom right, #e6fffa, #e6f7ff);
+    background-color: rgb(216, 230, 217);
     padding: 2rem;
   }
   

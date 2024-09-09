@@ -52,7 +52,6 @@ router.get("/post/:post_idx", (req, res) => {
         });
 });
 });
-
 // router.get("/comment:post_idx",(req,res)=>{
 //         const data = req.body    
 // // 내가 데이터 받고 post_idx 맞는 조건문 걸어서 프론트에 보내주면 map함수로 띄어주기
@@ -68,16 +67,17 @@ router.get("/post/:post_idx", (req, res) => {
 // });
 
 router.post("/comment",(req,res)=>{
-    const data = req.body
-    console.log(data);
 
-    let sql = "insert into tbl_comment(post_idx, comt_content, cmt_like, user_id) values (?, ?, ?, ?)";
-    conn.query(sql, [data[0].post_idx, data[0].content, data[0].like, user_id],(err, result)=>{
+    const { post_idx, content, user_id } = req.body;
+    console.log({ post_idx, content, user_id });
+
+    let sql = "insert into tbl_comment(post_idx, comt_content, user_id) values (?, ?, ?)";
+    conn.query(sql, [post_idx, content, user_id],(err, result)=>{
         if(err){
             return res.status(500).json({error: "Insert failed"})
-        }else{
-            res.json({message:"Insert success"})
         }
+        res.status(200).json({ message: 'Comment added successfully' });
+
     });
 });
 

@@ -56,8 +56,8 @@ router.post("/alias",(req,res)=>{
         // const data = req.body
         // console.log(data)
         // const inputPlantName = data.inputPlantName
-        let {plant_idx, user_id, inputAlias} =req.body
-        console.log(1)
+        let {plant_idx, user_id, inputAlias} =req.body;
+        console.log("Received data:", { plant_idx, user_id, inputAlias });
         // 다음 growing_idx 값 가져오기
         // let getNextIdxSql = "SELECT IFNULL(MAX(growing_idx), 0) + 1 AS next_idx FROM tbl_growing_plant";
         // conn.query(getNextIdxSql, (err, idxResults) => {
@@ -69,10 +69,10 @@ router.post("/alias",(req,res)=>{
         let sql = "insert into tbl_growing_plant(user_id, plant_idx, growing_st_dt, plant_alias) values (?,?,CURRENT_TIMESTAMP,?)"
         conn.query(sql, [user_id ,plant_idx, inputAlias], (err,res)=>{
             if(err){
-                console.log(err)
-                return res.status(500).json("plantAlias error");
+                console.error("Database error:", err);
+                return res.status(500).json({ message: "plantAlias error" });
             }
-            console.log(res)
+            console.log("Query results:", results);
             res.json({message:"success"});
             });
     });

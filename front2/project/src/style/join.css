@@ -1,16 +1,109 @@
-.input {
-    
-    background-color: greenyellow;
-    
-}
-
-.a {
-    width: 200px;
-}
-
-
-.box{
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f4f8;
     display: flex;
-    flex-direction: row; 
-
-}
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+  }
+  
+  .body {
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+  }
+  
+  h1 {
+    color: #2c3e50;
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+  
+  .input {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .a, input[type="text"], input[type="password"], input[type="email"], select {
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+    border: 1px solid #bdc3c7;
+    border-radius: 4px;
+    font-size: 1rem;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  .box {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+  
+  .box span {
+    margin-right: 0.5rem;
+    min-width: 60px;
+  }
+  
+  .email {
+    flex: 1;
+    margin-right: 0.5rem;
+  }
+  
+  #domain-txt {
+    flex: 1;
+    margin-right: 0.5rem;
+  }
+  
+  #domain-list {
+    background-color: #fff;
+  }
+  
+  #phone {
+    background-color: #fff;
+    margin-right: 0.5rem;
+    width: auto;
+  }
+  
+  input[type="submit"] {
+    background-color: #123d18;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  input[type="submit"]:hover {
+    background-color: #3f6445;
+  }
+  
+  p {
+    text-align: center;
+    margin-top: 1rem;
+    color: #2ecc71;
+  }
+  
+  @media (max-width: 480px) {
+    .body {
+      padding: 1rem;
+    }
+  
+    .box {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .box span {
+      margin-bottom: 0.5rem;
+    }
+  
+    .email, #domain-txt, #domain-list {
+      width: 100%;
+      margin-right: 0;
+      margin-bottom: 0.5rem;
+    }
+  }

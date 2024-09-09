@@ -18,18 +18,23 @@ const Alias = () => {
     const navigate = useNavigate();
     const location = useLocation();
     // console.log('Current path:', location.pathname);
-    console.log(userId)
+    // console.log(userId)
 
     useEffect(() => {
+
+        console.log(`Location pathname: ${location.pathname}`);
+        console.log(`Response Message: ${responseMessage}`);
+
         if (location.pathname === '/main/alias' && !responseMessage) {
+            console.log('Navigating to /main/myplant');
             navigate('/main/myplant');
         }
-        console.log(responseMessage)
+        // console.log(responseMessage)
     }, [location.pathname, responseMessage, navigate]);
 
     const handleInputChange = (e) => {
         setInputPlantName(e.target.value);
-        console.log(e.target.value);
+        // console.log(inputPlantName);
     };
 
     //const handleAliasChange = (e) => {
@@ -38,12 +43,14 @@ const Alias = () => {
 
     const sendPlant = async (e) => {
         e.preventDefault();
+        console.log(`Sending plant name: ${inputPlantName}`);
+
 
 
         try {
 
-            const response = await axios.post('http://192.168.219.62:3001/main/myplant', { inputPlantName });
-            console.log('Response Data:', response.data.data);
+            const response = await axios.post('http://192.168.219.64:3001/main/myplant', { inputPlantName });
+            console.log('Response Data:', response.data);
 
             if (response.data.message === "success") {
                 console.log('Success Message:', response.data.message);
