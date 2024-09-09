@@ -15,9 +15,9 @@ const Main = () => {
     useEffect(() => {
         const fetchPlants = async () => {
             try {
-                const response = await axios.post('http://192.168.219.62:3001/main/')
+                const response = await axios.post('http://192.168.219.64:3001/main/',{userId:userId})
                 console.log(response)
-                setPlantList(response.data.plants);
+                setPlantList(response.data.data);
             } catch (error) {
                 console.error('Error fetching plant data', error);
             }
@@ -74,12 +74,13 @@ const Main = () => {
 
                     <div className="plant-card">
                         <div className='plant-header'>
-                            {plantList.length > 0 ? (
+                            {plantList && plantList.length > 0 ? (
                                 plantList.map((plant) => (
-                                    <div key={plant.id} className="plant-item">
-                                        <h3>{plant.name}</h3>
-                                        <p>별칭: {plant.alias}</p>
-                                        <p>정보: {plant.species}</p>
+                                    <div key={plant.growing_idx} className="plant-item">
+                                        <h3>Plant Name: {plant.name}</h3>
+                                        <p>Alias: {plant.alias}</p>
+                                        <p>Species: {plant.species}</p>
+                                        <p>Start Date: {new Date(plant.growing_st_dt).toLocaleDateString()}</p>
                                     </div>
                                 ))
                             ) : (

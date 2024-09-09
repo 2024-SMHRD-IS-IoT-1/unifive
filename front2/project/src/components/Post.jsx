@@ -20,7 +20,7 @@ const Post = () => {
         return;
       }
       try {
-        const response = await axios.get(`http://192.168.219.62:3001/community/post/${postIdx}`);
+        const response = await axios.get(`http://192.168.219.64:3001/community/post/${postIdx}`);
         console.log('Server response:', response.data); // 서버 응답 로그 확인
 
         const { post, comments } = response.data;
