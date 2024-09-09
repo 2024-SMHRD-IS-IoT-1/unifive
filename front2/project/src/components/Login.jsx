@@ -6,14 +6,14 @@ import Cookies from "js-cookie" // 쿠키
 import { jwtDecode } from 'jwt-decode'
 import { Data } from '../App';
 import { Button } from 'react-bootstrap';
-import 'bootstrap/dist/css/bootstrap.min.css'; 
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 
 
 
 const Login = () => {
-    const {setUserId} = useContext(Data);
+    const { setUserId } = useContext(Data);
     const [inputId, setInputId] = useState('')
     const [inputPw, setInputPw] = useState('')
     // const [userId, setuserId] = useState('')
@@ -33,7 +33,7 @@ const Login = () => {
             console.log(response, inputId);
 
             // 서버에서 받은 JWT
-            const token = response.data.token; 
+            const token = response.data.token;
             console.log("토큰", token)
 
             // JWT 토큰을 쿠키에 저장
@@ -48,12 +48,12 @@ const Login = () => {
 
             // JWT 토큰 디코딩 -> 사용자 id 추출
             if (token) {
-                try{
+                try {
                     const decoded = jwtDecode(token)
                     setUserId(decoded.id) //디코딩된 Id를 유저 아이디에 저장
                     console.log('디코딩 성공?', decoded.id)
                 } catch (error) {
-                    console.log('디코딩 실패',error)
+                    console.log('디코딩 실패', error)
                 }
             }
 
@@ -94,29 +94,29 @@ const Login = () => {
 
     return (
         <div id='login'>
-                
+
             <form onSubmit={sendInput} id='login-box'>
-            <br />
-            <br />
+                <br />
+                <br />
 
                 <img src="../smartfarm.png" id='img' />
                 <h5>로그인</h5>
                 <br />
                 <br />
-                
+
                 <label htmlFor='idbox'>아이디</label>
                 <input type="text" onChange={e => setInputId(e.target.value)} id='idbox' />
-                
+
                 <label htmlFor='pwbox'>비밀번호</label>
                 <input type="password" onChange={e => setInputPw(e.target.value)} id='pwbox' />
                 <br />
                 <br />
-                
-                
+
+
                 <input type="submit" value="로그인" id='sub' />
                 <br />
                 <br />
-                
+
                 <Button id='join' onClick={handleJoin} variant="outline-danger">회원가입</Button>
                 <br />
                 <br />
@@ -125,7 +125,7 @@ const Login = () => {
                 <br />
                 <br />
                 <br />
-                
+
             </form>
         </div>
     )

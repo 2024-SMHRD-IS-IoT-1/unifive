@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useContext } from 'react';
-import axios from 'axios' ;
+import axios from 'axios';
 import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom';
-import {Data} from '../App' 
+import { Data } from '../App'
 import Cookies from 'js-cookie'
 import '../style/main.css'
 
