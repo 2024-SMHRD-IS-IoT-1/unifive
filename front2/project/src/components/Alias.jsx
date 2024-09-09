@@ -43,7 +43,7 @@ const Alias = () => {
 
         try {
 
-            const response = await axios.post('http://192.168.219.56:3001/main/myplant', { inputPlantName });
+            const response = await axios.post('http://192.168.219.62:3001/main/myplant', { inputPlantName });
             console.log('Response Data:', response.data.data);
 
             if (response.data.message === "success") {
@@ -70,7 +70,7 @@ const Alias = () => {
             const plant_name = responseMessage.plant_name;
             console.log(plant_idx, plant_name)
             if (plant_idx !== undefined && plant_name !== undefined) {
-                await axios.post('http://192.168.219.56:3001/main/alias',
+                await axios.post('http://192.168.219.62:3001/main/alias',
                     {
                         // input_id
                         // : input_id,

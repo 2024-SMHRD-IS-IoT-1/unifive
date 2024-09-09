@@ -8,7 +8,7 @@ router.get('/data', (req, res) => {
         if (err) {
             return res.status(500).json({ error: "Database query error" });
         }
-        res.json(results); // 아두이노에 데이터 전송
+        res.status(500).json(results); // 아두이노에 데이터 전송
     });
 });
 

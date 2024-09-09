@@ -6,6 +6,7 @@ import { Data } from '../App'
 
 const MyPage = () => {
     const {userId} = useContext(Data);
+    const {logOut} = useContext(Data);
 
         
 

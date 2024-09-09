@@ -13,9 +13,9 @@ router.post("/",(req,res)=>{
             let sql = "select * from tbl_plant where plant_idx = ?"
             conn.query(sql, [plant_idx], (err, results)=>{
                 if(err){
-                    return res.json({error: "DB query error"})
+                    return res.status(500).json({error: "DB query error"})
                 } 
-                axios.post("http://192.168.219.56:3001/data", results)
+                axios.post("http://192.168.219.62:3001/data", results)
                 .then(response => res.json({message:autoMode}))
                 .catch(error => res.json({error:"autoMode error"}))
             });
@@ -32,7 +32,7 @@ router.post("/myplant",(req,res)=>{
     let sql = "select * from tbl_plant where plant_name = ?"
     conn.query(sql, [inputPlantName], (err,results)=>{
         if(err){
-            return res.json("error")
+            return res.status(500).json("error")
         }
         //res.json(results); // db에 있는 이름과 일치하는 식물데이터 정보
         if (results.length > 0) {
@@ -62,7 +62,7 @@ router.post("/alias",(req,res)=>{
         conn.query(sql, [user_id ,plant_idx, inputAlias], (err,res)=>{
             if(err){
                 console.log(err)
-                return res.json("plantAlias error");
+                return res.status(500).json("plantAlias error");
             }
             console.log(res)
             res.json({message:"success"});

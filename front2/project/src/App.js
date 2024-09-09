@@ -9,14 +9,16 @@ import MyPage from './components/MyPage';
 import Community from './components/Community';
 import Post from './components/Post'
 import Write from './components/Write'
-import { Route, Routes } from 'react-router-dom';
-
+import { Navigate, Route, Routes, useNavigate } from 'react-router-dom';
+import Cookies from 'js-cookie'
 
 
 export const Data = createContext();
 
 function App() {
   const [userId, setUserId] = useState('');
+
+  
 
   //useEffect(() => {
   // setTrainerInfo(JSON.parse(sessionStorage.getItem('info')))

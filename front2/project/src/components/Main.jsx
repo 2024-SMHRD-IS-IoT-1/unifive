@@ -3,10 +3,11 @@ import axios from 'axios';
 import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom';
 import { Data } from '../App'
+import Cookies from 'js-cookie'
 
 
 const Main = () => {
-    const { userId } = useContext(Data);
+    const { userId, setUserId } = useContext(Data);
     const [plantList, setPlantList] = useState([]);
     console.log(userId);
     useEffect(() => {
@@ -21,6 +22,21 @@ const Main = () => {
 
         fetchPlants();
     }, [])
+
+
+    const Navigate = useNavigate()
+
+    const handleLogout = () => {
+
+        // 쿠키에서 삭제
+        Cookies.remove('token')
+
+        setUserId("")
+
+        // 로그인 페이지로 이동.
+        Navigate('/')
+    }
+
 
 
     return (
@@ -41,7 +57,9 @@ const Main = () => {
                     ))
                 ) : (
                     <p>No plant found.</p>
+
                 )}
+                <button onClick={handleLogout}>로그아웃</button>
             </div>
         </div>
     );

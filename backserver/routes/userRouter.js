@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken')
 
 
 router.get("/", (req,res)=>{
-    console.log("user ROuter")
+    //console.log("user ROuter")
     res.end()
 })
 
@@ -23,7 +23,7 @@ router.post("/join",(req,res)=>{
             res.json({message:"fail"})
         }}
         catch(err){
-            console.log(err);
+            res.status(500).json({message:"error"});
         }
     })
 })
@@ -34,7 +34,7 @@ router.post("/login", (req, res) => {
     console.log(req.body)
     let sql = "select user_id, user_name from tbl_user where user_id=? and user_pw=SHA2(?, 224)";
     conn.query(sql, [inputId, inputPw], (err, rows) => {
-        console.log(rows)
+        console.log(rows) 
         try {
             if (rows.length > 0) {
                 // req.session.user_id=inputId;
@@ -54,7 +54,7 @@ router.post("/login", (req, res) => {
                 res.json({ message: "fail" });
             }
         } catch (err) {
-            console.log(err);
+            res.status(500).json({message:"error"});
         }
     });
 
@@ -84,7 +84,7 @@ router.post("/user/update", (req,res)=>{
             res.json({message:"fail"})
         )}
         catch(err){
-            console.log(err);
+            res.status(500).json({message:"error"})
         }
     })
 
@@ -103,10 +103,33 @@ router.post("/user/delete",(res,req)=>{
             res.json({message:"fail"})
         }}
         catch(err){
-            console.log(err);
+            res.status(500).json({message:"error"})
         }
     })
 })
+
+// 회원 기본 프로필
+// 회원이 찍은 사진
+router.get("/post/:post_idx",(req,res)=>{
+    const postIdx = req.params.post_idx;
+    const sqlselect = "select * from tbl_post where post_idx = ?";
+    conn.query(sqlselect, [postIdx], (err, res) => {
+        if (err) {
+        return res.status(500).json({ error: "Fetch failed" });
+        }
+    })
+    const sqlcomment = "select * from tbl_comment where post_idx = ?";
+    conn.query(sqlcomment, [], (err, comments)=>{
+        if (err){
+        return res.status(500).json({ error: "Fetch failed" });
+        }
+    res.json({comments, res, postIdx});
+});
+});
+router.get("/user/profile:user_id",(req,res),{
+    
+    
+});
 
 
 module.exports = router;
