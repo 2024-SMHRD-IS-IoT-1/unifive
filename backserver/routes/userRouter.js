@@ -108,28 +108,28 @@ router.post("/user/delete",(res,req)=>{
     })
 })
 
-// 회원 기본 프로필
-// 회원이 찍은 사진
-router.get("/post/:post_idx",(req,res)=>{
-    const postIdx = req.params.post_idx;
-    const sqlselect = "select * from tbl_post where post_idx = ?";
-    conn.query(sqlselect, [postIdx], (err, res) => {
-        if (err) {
-        return res.status(500).json({ error: "Fetch failed" });
-        }
-    })
-    const sqlcomment = "select * from tbl_comment where post_idx = ?";
-    conn.query(sqlcomment, [], (err, comments)=>{
-        if (err){
-        return res.status(500).json({ error: "Fetch failed" });
-        }
-    res.json({comments, res, postIdx});
-});
-});
-router.get("/user/profile:user_id",(req,res),{
+// // 회원 기본 프로필
+// // 회원이 찍은 사진
+// router.get("/post/:post_idx",(req,res)=>{
+//     const postIdx = req.params.post_idx;
+//     const sqlselect = "select * from tbl_post where post_idx = ?";
+//     conn.query(sqlselect, [postIdx], (err, res) => {
+//         if (err) {
+//         return res.status(500).json({ error: "Fetch failed" });
+//         }
+//     })
+//     const sqlcomment = "select * from tbl_comment where post_idx = ?";
+//     conn.query(sqlcomment, [], (err, comments)=>{
+//         if (err){
+//         return res.status(500).json({ error: "Fetch failed" });
+//         }
+//     res.json({comments, res, postIdx});
+// });
+// });
+// router.get("/user/profile:user_id",(req,res),{
     
     
-});
+// });
 
 
 module.exports = router;

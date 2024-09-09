@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { Data } from '../App'
 import Cookies from 'js-cookie'
 import '../style/main.css'
+import { Leaf,Users,User,LogOut,Plus } from 'lucide-react';
 
 
 const Main = () => {
@@ -15,7 +16,8 @@ const Main = () => {
     useEffect(()=>{
             const fetchPlants = async () => {
                 try {
-                    const response = await axios.get('http://192.168.219.64:3001/main')
+                    const response = await axios.post('http://192.168.219.64:3001/main', {user_id: userId})
+                    
                     setPlantList(response.data.plants);
                 } catch (error) {
                     console.error('Error fetching plant data' , error);
@@ -73,12 +75,13 @@ const Main = () => {
 
                     <div className="plant-card">
                         <div className='plant-header'>
-                            {plantList.length > 0 ? (
+                        {/* <svg className="plant-icon"></svg> */}
+                            {plantList && plantList.length > 0 ? (
                                 plantList.map((plant) => (
                                 <div key={plant.id} className="plant-item">
                                     <h3>{plant.name}</h3>
                                     <p>별칭: {plant.alias}</p>
-                                    <p>정보: {plant.species}</p>
+                                    <p>정보: {plant.species}</p>/
                                 </div>
                                 ))
                             ) : (

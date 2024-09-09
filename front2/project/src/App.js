@@ -42,7 +42,7 @@ function App() {
           <Route path='/' element={<Main />}></Route>
         )}
         {/* <Route path='/login' element={<Login />}></Route> */}
-        {/*<Route path='/main' element={<Main />}></Route>*/}
+        <Route path='/main' element={<Main />}></Route>
         <Route path='/join' element={<Join />}></Route>
         <Route path='/main/myplant' element={<Alias />}></Route>
         <Route path='/main/alias' element={<Alias />}></Route>

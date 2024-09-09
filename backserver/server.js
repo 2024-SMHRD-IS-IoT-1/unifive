@@ -9,7 +9,7 @@ const bp = require("body-parser");
 const userRouter = require("./routes/userRouter");
 const mainRouter = require("./routes/mainRouter");
 const communityRouter = require("./routes/communityRouter");
-const photoRouter = require("./routes/photoRouter");
+// const photoRouter = require("./routes/photoRouter");
 
 
 // cors 설정 ( 도메인 주소가 달라도 일치 시킬 수 있음)
@@ -20,7 +20,7 @@ app.use(express.json());
 app.use("/user",userRouter);
 app.use("/main",mainRouter);
 app.use("/community",communityRouter);
-app.use("/photo", photoRouter);
+// app.use("/photo", photoRouter);
 
 // 메인페이지 경로 설정 3
 // const joinRouter = require('./routes/userRouter')

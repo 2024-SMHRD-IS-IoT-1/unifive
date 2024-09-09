@@ -11,17 +11,16 @@ router.post("/",(req,res)=>{
 
         if (auto){
             let sql = "select * from tbl_plant where plant_idx = ?"
+            console.log("Fetching plant with index:", plant_idx);
             conn.query(sql, [plant_idx], (err, results)=>{
-                if(err){
+                if(err){                                                                                                                                        
+                    console.error("Database query error:", err);
                     return res.status(500).json({error: "DB query error"})
                 } 
-<<<<<<< HEAD
+                console.log("Query results:", results);
                 axios.post("http://192.168.219.64:3001/data", results)
-=======
-                axios.post("http://192.168.219.62:3001/data", results)
->>>>>>> 026a67ab24a8b4f3b8209417d4274aac22dbe07f
-                .then(response => res.json({message:autoMode}))
-                .catch(error => res.json({error:"autoMode error"}))
+                    .then(response => res.json({message:autoMode}))
+                    .catch(error =>  res.status(500).json({ error: "autoMode error" }));
             });
         }else if(passivity){
             
@@ -52,8 +51,8 @@ router.post("/alias",(req,res)=>{
         // const data = req.body
         // console.log(data)
         // const inputPlantName = data.inputPlantName
-        let {plant_idx, user_id, inputAlias} =req.body
-        console.log(1)
+        let {plant_idx, user_id, inputAlias} =req.body;
+        console.log("Received data:", { plant_idx, user_id, inputAlias });
         // 다음 growing_idx 값 가져오기
         // let getNextIdxSql = "SELECT IFNULL(MAX(growing_idx), 0) + 1 AS next_idx FROM tbl_growing_plant";
         // conn.query(getNextIdxSql, (err, idxResults) => {
@@ -65,10 +64,10 @@ router.post("/alias",(req,res)=>{
         let sql = "insert into tbl_growing_plant(user_id, plant_idx, growing_st_dt, plant_alias) values (?,?,CURRENT_TIMESTAMP,?)"
         conn.query(sql, [user_id ,plant_idx, inputAlias], (err,res)=>{
             if(err){
-                console.log(err)
-                return res.status(500).json("plantAlias error");
+                console.error("Database error:", err);
+                return res.status(500).json({ message: "plantAlias error" });
             }
-            console.log(res)
+            console.log("Query results:", results);
             res.json({message:"success"});
             });
     });
