@@ -49,7 +49,7 @@ const Alias = () => {
 
         try {
 
-            const response = await axios.post('http://192.168.219.64:3001/main/myplant', { inputPlantName });
+            const response = await axios.post('http://192.168.219.62:3001/main/myplant', { inputPlantName });
             console.log('Response Data:', response.data);
 
             if (response.data.message === "success") {

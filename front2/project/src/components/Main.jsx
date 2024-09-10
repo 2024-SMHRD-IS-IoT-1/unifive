@@ -15,7 +15,7 @@ const Main = () => {
     useEffect(() => {
         const fetchPlants = async () => {
             try {
-                const response = await axios.post('http://192.168.219.64:3001/main/',{userId:userId})
+                const response = await axios.post('http://192.168.219.62:3001/main/', { userId: userId })
                 console.log(response)
                 setPlantList(response.data.data);
             } catch (error) {

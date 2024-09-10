@@ -41,7 +41,7 @@ const Post = () => {
     try {
       const commentData = { post_idx: postIdx, content: newComment, user_id: userId };
       console.log('댓글 데이터:', commentData);
-      const response = await axios.post('http://192.168.219.64:3001/community/comment', commentData);
+      const response = await axios.post('http://192.168.219.62:3001/community/comment', commentData);
       console.log('댓글 전송 응답:', response.data);
       setComments([...comments, { post_idx: postIdx, content: newComment, user_id: userId }]);
       setNewComment('');

@@ -19,7 +19,7 @@ router.post("/write",(req,res)=>{
     console.log(data);
     
     let sql = "insert into tbl_post (post_title, post_content, user_id, post_category) values (?, ?, ?, ?)";
-    conn.query(sql, [data[0].title, data[0].content, data.userId, data[0].category ],(err, post)=>{
+    conn.query(sql, [data.title, data.content, data.userId, data.category ],(err, post)=>{
         if(err){
             return res.status(500).json("post error");
         }
@@ -71,12 +71,12 @@ router.post("/comment",(req,res)=>{
     const { post_idx, content, user_id } = req.body;
     console.log({ post_idx, content, user_id });
 
-    let sql = "insert into tbl_comment(post_idx, comt_content, user_id) values (?, ?, ?)";
+    let sql = "insert into tbl_comment(post_idx, cmt_content, user_id) values (?, ?, ?)";
     conn.query(sql, [post_idx, content, user_id],(err, result)=>{
         if(err){
             return res.status(500).json({error: "Insert failed"})
         }
-        res.status(200).json({ message: 'Comment added successfully' });
+        res.status(200).json({ message: 'Comment added successfully' , data:result});
 
     });
 });

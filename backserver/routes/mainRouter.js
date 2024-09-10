@@ -11,7 +11,7 @@ router.post("/",(req,res)=>{
             if(err){
                 return res.status(500).json("error");
             }else{
-                res.json({message:"seccess",data :result });
+                res.json({message:"seccess",data :result, userId : userId });
             }
         })
 

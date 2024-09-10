@@ -22,7 +22,7 @@ const Community = () => {
     useEffect(() => {
         const fetchPosts = async () => {
             try {
-                const response = await axios.get('http://192.168.219.64:3001/community/community');
+                const response = await axios.get('http://192.168.219.62:3001/community/community');
                 setPosts(response.data.data); // 받아온 데이터 저장
             } catch (error) {
                 console.error('게시글을 불러오는 중 에러가 발생했습니다:', error);
@@ -39,11 +39,11 @@ const Community = () => {
         : posts.filter(post => post.post_category === activeCategory);
 
 
-        const handlePostClick = (postIdx) => {
-            navigate(`/community/post/${postIdx}`);
-        };
-        
-        
+    const handlePostClick = (postIdx) => {
+        navigate(`/community/post/${postIdx}`);
+    };
+
+
     return (
         <div className='container'>
             <div>
@@ -92,7 +92,7 @@ const Community = () => {
                 )}
 
                 {/* 글쓰기 버튼 */}
-                <button 
+                <button
                     className='write-post-button'
                     onClick={() => navigate('/community/write')}
                 >

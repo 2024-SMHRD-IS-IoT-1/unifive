@@ -4,7 +4,7 @@
 
 const char* ssid = "SHRDI_501B";
 const char* password = "a123456789";
-String address = "http://localhost:3001/main/myplant";
+String address = "http://localhost:3001/main";
 HTTPClient http;
 
 const int fanPin = 2;    // 환풍기 핀
@@ -31,7 +31,7 @@ void loop() {
     http.begin(address);
     http.addHeader("Content-Type", "application/x-www-form-urlencoded");
     
-    int httpCode = http.GET();  // GET 방식으로 서버로부터 데이터 받아오기
+    int httpCode = http.POST();  // GET 방식으로 서버로부터 데이터 받아오기
     if (httpCode > 0) {
       String payload = http.getString();
       Serial.println(payload);
@@ -46,6 +46,8 @@ void loop() {
       String plantHumidity = doc[0]["plant_humidity"];
       String plantWater = doc[0]["plant_water"];
       String plantVentilation = doc[0]["plant_ventilation"];
+
+      Serial.println(plantSleepCycle)
 
       // 1. 식물 수면시간 체크 (수면시간이 아니면 불 켜기)
       if (!isSleepTime(plantSleepCycle)) {
