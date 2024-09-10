@@ -9,7 +9,7 @@ router.get("/community",(req,res)=>{
     if(err){
         return res.status(500).json({error:"post_list error"})
     }
-    console.log(a)
+    // console.log(a)
     res.json({data:post_list});
     });
 });
@@ -23,7 +23,7 @@ router.post("/write",(req,res)=>{
         if(err){
             return res.status(500).json("post error");
         }
-        console.log(1);
+        // console.log(1);
         res.json({message:"등록완료",data:post});
     });
 })
@@ -80,5 +80,4 @@ router.post("/comment",(req,res)=>{
 
     });
 });
-
 module.exports = router;

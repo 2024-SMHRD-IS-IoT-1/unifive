@@ -64,29 +64,27 @@ router.post("/login", (req, res) => {
 
 
 //정보수정 기능 라우터
-router.post("/user/update", (req,res)=>{
-    let{inputId, inputPw, inputName, inputPhone} = req.body;
+router.post("/modify", (req,res)=>{
+    const {userId, userPw, userName, userEmail, userPhone} = req.body;
 
-    let sql = "update tbl_user set ";
-    // id, pw로 유저 찾아서 원하는 정보만 수정하기(sql뒤에 조건문추가, 삽입)
-    let fields = [];
-
-    if (inputName) fields.push(`user_name = '${inputName}'`);
-    if (inputPhone) fields.push(`user_phone = '${inputPhone}'`);
-
-    sql += fields.join(", ") + "where user_id =? and user_pw =SHA2(?, 224)";
-
-    conn.query(sql, [inputId, inputPw, inputName, inputPhone], (err, rows)=>{
-        try{
-        if(rows.affectedRows > 0){
-            res.json({message:"success"})
-        }else(
-            res.json({message:"fail"})
-        )}
-        catch(err){
-            res.status(500).json({message:"error"})
+    if(!userPw && userName && userEmail && userPhone){
+    let selectsql = " select * from tbl_user where user_id = ? ";
+    conn.query(sql, [userId], (err, modify)=>{
+        if(err){
+            res.json({error:"select error"});
         }
+        res.json({modify:modify});
+    });
+}else{
+    let updatesql = "update tbl_user set user_pw = ?, user_name = ?, user_email, user_phone = ? Where user_id = ? " 
+    conn.query(updatesql, [userPw, userName, userEmail, userPhone, userId], (err, result)=>{
+        if(err){
+            return res.status(500).json({error:"update error"});
+        }
+        return res.json({message: "update success"});
+
     })
+}
 
 })
 

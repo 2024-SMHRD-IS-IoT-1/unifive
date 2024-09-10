@@ -20,7 +20,7 @@ const Post = () => {
         return;
       }
       try {
-        const response = await axios.get(`http://192.168.219.64:3001/community/post/${postIdx}`);
+        const response = await axios.get(`http://192.168.219.62:3001/community/post/${postIdx}`);
         console.log('Server response:', response.data); // 서버 응답 로그 확인
 
         const { post, comments } = response.data;
@@ -39,9 +39,9 @@ const Post = () => {
     if (newComment.trim() === '') return;
     console.log(userId)
     try {
-      const commentData = { post_idx: postIdx, content: newComment, user_id: userId };
-      console.log('댓글 데이터:', commentData);
-      const response = await axios.post('http://192.168.219.62:3001/community/comment', commentData);
+      // const commentData = { post_idx: postIdx, content: newComment, user_id: userId };
+      // console.log('댓글 데이터:', commentData);
+      const response = await axios.post('http://192.168.219.64:3001/community/comment', { post_idx: postIdx, content: newComment, user_id: userId });
       console.log('댓글 전송 응답:', response.data);
       setComments([...comments, { post_idx: postIdx, content: newComment, user_id: userId }]);
       setNewComment('');
@@ -59,7 +59,7 @@ const Post = () => {
     formData.append('image', file);
 
     try {
-      const response = await axios.post(`http://192.168.219.64:3001/community/post/${postIdx}/upload`, formData, {
+      const response = await axios.post(`http://192.168.219.62:3001/community/post/${postIdx}/upload`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
@@ -102,21 +102,21 @@ const Post = () => {
         {/* 댓글 작성 */}
         <section className="comments-section">
           <h2>댓글</h2>
-          <ul className="comments-list">
+          <div className="comments-list">
             {comments.length > 0 ? (
               comments.map((comment, index) => (
-                <li key={index} className="comment">
+                <div key={index} className="comment">
                   <div className="comment-header">
-                    <strong>{comment.user_id}</strong>
-                    <span>{comment.created_at}</span>
+                    <p>{comment.user_id} :
+                      {comment.cmt_content}</p>
+                    {/* <span>{comment.created_at}</span> */}
                   </div>
-                  <p>{comment.cmt_content}</p>
-                </li>
+                </div>
               ))
             ) : (
               <p>댓글이 없습니다.</p>
             )}
-          </ul>
+          </div>
           <form onSubmit={handleCommentSubmit} className="comment-form">
             <textarea
               value={newComment}

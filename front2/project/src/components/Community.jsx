@@ -1,8 +1,8 @@
-import React from 'react';
-import { useEffect, useState } from 'react';
-import axios, { formToJSON } from 'axios';
-import '../style/community.css';
+import React , { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import '../style/community.css';
+
 
 
 const Community = () => {

@@ -8,18 +8,28 @@ body {
 }
 
 .main-container {
+  position: absolute;
+  left: 0;
+  top: 0;
   padding: 3rem;
+  overflow: auto; /* Allow content to scroll if it exceeds the viewport */
 }
 
 /* Content Wrapper */
 .content-wrapper {
+  position: absolute;
   max-width: 1200px;
+  /* height: 100vh; */
+  min-height: 100vh;
   margin: 0 auto;
   background-color: #ffffff;
   border-radius: 8px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   padding: 3rem;
   position: relative;
+  /* min-height: 100%; */
+  overflow: visible;
+  color: #000000; /* Set text color to black */
 }
 
 /* Header Styling */
@@ -36,33 +46,28 @@ header {
   font-weight: bold;
   margin: 0;
   letter-spacing: 0.05rem;
-  margin-right: 2rem; /* Ensure some space between title and buttons */
+  margin-right: 2rem;
 }
 
 /* Button Group */
 .button-group {
   position: relative;
   display: flex;
-  gap: 0.5rem; /* Reduced gap between buttons */
+  gap: 0.5rem;
   align-items: center;
   justify-content: flex-end;
-  margin-left: auto; /* Push the buttons to the far right */
+  margin-left: auto;
+  flex-wrap: wrap;
 }
 
-/* Add more space between title and button group */
-header {
-  margin-bottom: 6rem; /* Increased space between title and button group */
-}
-
-/* Transparent Background Buttons with No Border */
 .button-group .circle-button {
-  background-color: transparent; /* Transparent background */
+  background-color: transparent;
   color: #4a4a4a;
-  border: none; /* Removed border */
-  border-radius: 50%; /* Circular shape */
-  width: 90px; /* Reduced button width */
-  height: 90px; /* Reduced button height */
-  font-size: 1rem; /* Adjusted font size */
+  border: none;
+  border-radius: 50%;
+  width: 90px;
+  height: 90px;
+  font-size: 1rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -73,8 +78,8 @@ header {
 }
 
 .button-group .circle-button:hover {
-  background-color: #4a4a4a; /* Change background on hover */
-  color: white; /* Change text color on hover */
+  background-color: #4a4a4a;
+  color: white;
 }
 
 /* Section Header Styling */
@@ -91,19 +96,19 @@ header {
 }
 
 .add-plant-button {
-  background-color: transparent; /* Transparent background */
+  background-color: transparent;
   color: #4a4a4a;
-  border: none; /* Removed border */
+  border: none;
   border-radius: 4px;
-  padding: 0.75rem 1.5rem; /* Adjusted padding for a smaller button */
-  font-size: 1.1rem; /* Adjusted font size */
+  padding: 0.75rem 1.5rem;
+  font-size: 1.1rem;
   cursor: pointer;
   transition: background-color 0.3s;
 }
 
 .add-plant-button:hover {
-  background-color: #4a4a4a; /* Change background on hover */
-  color: white; /* Change text color on hover */
+  background-color: #4a4a4a;
+  color: white;
 }
 
 /* Plant Card Styling */
@@ -112,6 +117,8 @@ header {
   border-radius: 8px;
   padding: 3rem;
   margin-bottom: 3rem;
+  overflow: hidden;
+  color: #000000; /* Set text color to black */
 }
 
 .plant-item {
@@ -134,6 +141,7 @@ header {
 .plant-item p {
   font-size: 1.1rem;
   margin: 0.75rem 0;
+  color: #000000; /* Set text color to black */
 }
 
 .empty-state {
@@ -178,13 +186,13 @@ header {
 
   .button-group {
     flex-direction: row;
-    gap: 0.5rem; /* Reduced gap for mobile screens */
+    gap: 0.5rem;
     justify-content: flex-end;
     margin-top: 1rem;
   }
 
   .circle-button {
-    width: 70px; /* Further reduced size for mobile */
+    width: 70px;
     height: 70px;
     font-size: 0.9rem;
   }

@@ -46,7 +46,7 @@ const Main = () => {
     }
 
     const handleMypage = () => {
-        navigate('/mypage')
+        navigate('/user/mypage')
     }
 
 
@@ -77,8 +77,8 @@ const Main = () => {
                             {plantList && plantList.length > 0 ? (
                                 plantList.map((plant) => (
                                     <div key={plant.growing_idx} className="plant-item">
-                                        <h3>Plant Name: {plant.name}</h3>
-                                        <p>Alias: {plant.alias}</p>
+                                        <h3>Plant Name: {plant.plant_name}</h3>
+                                        <p>Alias: {plant.plant_alias}</p>
                                         <p>Species: {plant.species}</p>
                                         <p>Start Date: {new Date(plant.growing_st_dt).toLocaleDateString()}</p>
                                     </div>
