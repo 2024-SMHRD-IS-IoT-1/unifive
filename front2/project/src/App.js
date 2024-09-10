@@ -9,6 +9,7 @@ import MyPage from './components/MyPage';
 import Community from './components/Community';
 import Post from './components/Post'
 import Write from './components/Write'
+import Modify from './components/Modify';
 import { Navigate, Route, Routes, useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie'
 
@@ -51,8 +52,9 @@ function App() {
 
         <Route path='/community/post/:postIdx' element={<Post />}></Route>
         <Route path='/community/write' element={<Write />}></Route>
-        <Route path='/mypage' element={<MyPage />}></Route>
-
+        <Route path='/user/mypage' element={<MyPage />}></Route>
+        <Route path='/user/modify' element={<Modify />}></Route>
+      
 
 
 

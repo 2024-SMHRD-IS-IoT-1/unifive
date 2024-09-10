@@ -34,12 +34,11 @@ const Write = () => {
 
     const handleleFormSubmit = async (e) => {
         e.preventDefault();
+        
         try {
-            const postData = {
-                ...newPost,
-                userId: userId
-            };
-            await axios.post('http://192.168.219.64/community/write', postData);
+            console.log('ss')
+            await axios.post('http://192.168.219.64:3001/community/write', 
+                { title: newPost.title, content: newPost.content, userId:userId, category:newPost.category});
             alert('게시글이 성공적으로 작성되었습니다.');
             navigate('/community');
         } catch (error) {

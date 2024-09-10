@@ -1,25 +1,23 @@
-import axios from 'axios'
-import React, { useState, useEffect, useContext, useRef } from 'react'
-import { useNavigate, useLocation } from 'react-router-dom'
-import Cookies from "js-cookie"
-import '../style/alias.css'
+import React, { useState, useEffect, useContext, useRef } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
+import axios from 'axios';
+import { Data } from '../App';
+import '../style/alias.css';
+
 import { Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Data } from '../App'
+
 
 
 const Alias = () => {
-    const { setUserId, userId } = useContext(Data);
 
+    const { setUserId, userId } = useContext(Data);
     const [inputPlantName, setInputPlantName] = useState('');
-    // const [inputAlias, setInputAlias] = useState('');
     const inputAlias = useRef('');
     const [responseMessage, setResponseMessage] = useState(null);
     const navigate = useNavigate();
     const location = useLocation();
-    // console.log('Current path:', location.pathname);
-    // console.log(userId)
-
+ 
     useEffect(() => {
 
         console.log(`Location pathname: ${location.pathname}`);
@@ -29,26 +27,20 @@ const Alias = () => {
             console.log('Navigating to /main/myplant');
             navigate('/main/myplant');
         }
-        // console.log(responseMessage)
     }, [location.pathname, responseMessage, navigate]);
+
 
     const handleInputChange = (e) => {
         setInputPlantName(e.target.value);
-        // console.log(inputPlantName);
     };
 
-    //const handleAliasChange = (e) => {
-    //   setInputAlias(e.target.value);
-    //};
+
 
     const sendPlant = async (e) => {
         e.preventDefault();
         console.log(`Sending plant name: ${inputPlantName}`);
 
-
-
         try {
-
             const response = await axios.post('http://192.168.219.64:3001/main/myplant', { inputPlantName });
             console.log('Response Data:', response.data);
 
@@ -66,7 +58,7 @@ const Alias = () => {
         }
     };
 
-    // console.log(inputPlantName)
+   
     const submitAlias = async (e) => {
         e.preventDefault();
         try {
@@ -78,8 +70,6 @@ const Alias = () => {
             if (plant_idx !== undefined && plant_name !== undefined) {
                 await axios.post('http://192.168.219.64:3001/main/alias',
                     {
-                        // input_id
-                        // : input_id,
                         user_id: userId,
                         plant_idx
                             : plant_idx,
@@ -96,35 +86,7 @@ const Alias = () => {
             alert('Error adding alias');
         }
     }
-    // }
-    // if (responseMessage) {
-    //     try {
-    //         console.log('Response Message:',responseMessage);
-    //         const result = responseMessage.results[0] || {};
-    // const plant_idx = result.plant_idx;
-    // const plant_name = result.plant_name;
-    //         console.log(result);
-    //         if (plant_idx !== undefined && plant_name !== undefined){
-    //             await axios.post('http://192.168.219.56:3001/main/alias',
-    //                 {
-    //                     // input_id
-    //                     // : input_id,
-    //                     plant_idx
-    //                     : plant_idx,
-    //                     inputAlias
-    //                     : inputAlias.current.value
-    //                 });
-    //             alert('Alias added successfully');
-    //             navigate('/main');
-    //         }else {
-    //             throw new Error('Invalid response data');
-    //         }
-    //     } catch (error) {
-    //         console.error('Error adding alias', error);
-    //         alert('Error adding alias');
-    //     }
-    // }
-    // }
+   
 
     return (
         <div className='alias-container'>
